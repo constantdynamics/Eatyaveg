@@ -59,6 +59,7 @@ export interface AppActions {
   selectChild(id: string): void;
   registerEats(input: RegisterInput): RegisterResult;
   removeEvents(ids: string[]): void;
+  restoreEvents(events: EatEvent[]): void;
   setPractice(childId: string, veggieId: VeggieId, enabled: boolean): void;
   updateSettings(patch: Partial<Settings>): void;
   toggleFavorite(recipeId: string): void;
@@ -229,6 +230,13 @@ export function createAppStore(repos: Repos): StoreBundle {
         removeEvents(ids) {
           const remove = new Set(ids);
           set((s) => ({ eatEvents: s.eatEvents.filter((e) => !remove.has(e.id)) }));
+        },
+
+        restoreEvents(events) {
+          set((s) => {
+            const existing = new Set(s.eatEvents.map((e) => e.id));
+            return { eatEvents: [...s.eatEvents, ...events.filter((e) => !existing.has(e.id))] };
+          });
         },
 
         setPractice(childId, veggieId, enabled) {

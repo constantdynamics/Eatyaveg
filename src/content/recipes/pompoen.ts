@@ -1,0 +1,103 @@
+import {
+  bouillon,
+  defineRecipe,
+  kaneel,
+  knoflook,
+  nootmuskaat,
+  olie,
+  pasta,
+  peper,
+  pompoen,
+  roomkaas,
+  ui,
+  water,
+  wortel,
+  zout,
+  ZOUT_STAP,
+} from './_helpers';
+
+export const pompoenRecipes = [
+  defineRecipe({
+    id: 'oranje-pompoensaus',
+    name: 'Oranje pompoensaus',
+    description: 'Zoete, romige pastasaus van pompoen en roomkaas.',
+    category: 'saus-dip',
+    mainVeggie: 'pompoen',
+    visibility: 1,
+    timeMinutes: 25,
+    ingredients: [
+      pasta(350, 'pasta', 'bijvoorbeeld fusilli'),
+      pompoen(500),
+      ui(1),
+      knoflook(1),
+      olie(1),
+      water(150),
+      roomkaas(100),
+      nootmuskaat(),
+      zout(),
+      peper(),
+    ],
+    steps: [
+      'Kook de pasta volgens de verpakking.',
+      'Snipper de ui en de knoflook en bak ze 3 minuten in de olijfolie. Voeg de pompoenblokjes en het water toe en laat ze met de deksel op in 12 minuten zacht worden.',
+      {
+        verstopt: 'Pureer alles glad met de roomkaas.',
+        zichtbaar:
+          'Pureer alles maar kort met de roomkaas, zodat er kleine stukjes pompoen in blijven.',
+      },
+      `Breng op smaak met nootmuskaat en meng met de pasta. ${ZOUT_STAP}`,
+    ],
+    tips: {
+      verstoppen: 'Pompoen is van zichzelf zoet; met roomkaas smaakt het als een milde kaassaus.',
+      weerstand:
+        'Vertel dat de saus dezelfde kleur heeft als een wortel en laat je kind raden wat erin zit.',
+      bewaren: 'De saus kan 3 maanden in de vriezer.',
+    },
+    allergens: ['gluten', 'melk'],
+  }),
+  defineRecipe({
+    id: 'oranje-soep',
+    name: 'Oranje soep van pompoen en wortel',
+    description: 'Fluweelzachte soep, lekker met een boterham om te dippen.',
+    category: 'soep',
+    mainVeggie: 'pompoen',
+    veggies: ['pompoen', 'wortel'],
+    visibility: 1,
+    timeMinutes: 30,
+    ingredients: [ui(1), olie(1), pompoen(600), wortel(150), water(800), bouillon(1)],
+    steps: [
+      'Snipper de ui en bak hem 3 minuten in de olijfolie in een soeppan.',
+      'Schil de wortel en snijd hem in plakjes. Doe hem met de pompoenblokjes, het water en het bouillonblokje in de pan.',
+      'Laat de soep met de deksel op 15 minuten zachtjes koken, tot alles zacht is.',
+      'Pureer de soep glad met een staafmixer. Laat de kinderportie even afkoelen.',
+    ],
+    tips: {
+      verstoppen: 'De wortel valt helemaal weg in de oranje kleur.',
+      weerstand:
+        'Geef er een boterham bij om in te dippen: dippen is vaak makkelijker dan lepelen.',
+      bewaren: 'Soep kan 3 dagen in de koelkast en 3 maanden in de vriezer.',
+    },
+    allergens: ['selderij'],
+  }),
+  defineRecipe({
+    id: 'pompoenblokjes-oven',
+    name: 'Zoete pompoenblokjes uit de oven',
+    description: 'Zachte, goudbruine blokjes pompoen met een snufje kaneel.',
+    category: 'snack',
+    mainVeggie: 'pompoen',
+    visibility: 4,
+    nextStep: true,
+    timeMinutes: 30,
+    ingredients: [pompoen(500), olie(1), kaneel(0.5)],
+    steps: [
+      'Verwarm de oven voor op 200 °C.',
+      'Hussel de pompoenblokjes met de olijfolie en de kaneel en verdeel ze over een bakplaat met bakpapier.',
+      'Bak ze in 20 tot 25 minuten zacht en goudbruin aan de randjes.',
+    ],
+    tips: {
+      weerstand: 'Leg de blokjes naast iets vertrouwds, zoals aardappeltjes of een boterham.',
+      bewaren: 'Restjes zijn koud ook lekker, of pureer ze door een saus.',
+    },
+    allergens: [],
+  }),
+];

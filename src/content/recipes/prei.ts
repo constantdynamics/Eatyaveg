@@ -1,0 +1,98 @@
+import {
+  aardappelen,
+  bloem,
+  boter,
+  bouillon,
+  defineRecipe,
+  ei,
+  kaas,
+  kipfilet,
+  kookroom,
+  melk,
+  olie,
+  pasta,
+  peper,
+  prei,
+  roomkaas,
+  water,
+} from './_helpers';
+
+export const preiRecipes = [
+  defineRecipe({
+    id: 'prei-aardappelsoep',
+    name: 'Romige prei-aardappelsoep',
+    description: 'Zachte, witte soep waarin de prei zoet en mild wordt.',
+    category: 'soep',
+    mainVeggie: 'prei',
+    visibility: 1,
+    timeMinutes: 30,
+    ingredients: [prei(2), aardappelen(400), olie(1), water(1000), bouillon(1), kookroom(100)],
+    steps: [
+      'Snijd de prei in ringen en was hem goed. Schil de aardappelen en snijd ze in blokjes.',
+      'Bak de prei 5 minuten zacht in de olijfolie in een soeppan.',
+      'Voeg de aardappelen, het water en het bouillonblokje toe en kook 15 minuten, tot alles zacht is.',
+      'Pureer de soep glad en roer de kookroom erdoor.',
+    ],
+    tips: {
+      verstoppen: 'Zacht gestoofde prei wordt zoet; gepureerd proef je vooral romige soep.',
+      weerstand: 'Een paar stukjes brood in de soep maken het spannend op een leuke manier.',
+      bewaren: '3 dagen in de koelkast.',
+    },
+    allergens: ['selderij', 'melk'],
+  }),
+  defineRecipe({
+    id: 'pasta-prei-kip',
+    name: 'Pasta met prei, kip en roomkaas',
+    description: 'Romige witte saus met zacht gestoofde prei en stukjes kip.',
+    category: 'hoofdgerecht',
+    mainVeggie: 'prei',
+    visibility: 1,
+    timeMinutes: 25,
+    ingredients: [
+      pasta(350, 'pasta', 'bijvoorbeeld vlinderpasta'),
+      kipfilet(300),
+      olie(1),
+      prei(1),
+      roomkaas(150),
+      melk(100),
+      peper(),
+    ],
+    steps: [
+      'Kook de pasta volgens de verpakking. Snijd de kip in kleine blokjes en bak ze in de olijfolie gaar.',
+      {
+        verstopt:
+          'Snijd de prei in ringen, was hem en stoof hem met een scheutje water in 10 minuten heel zacht. Pureer hem met de roomkaas en de melk.',
+        zichtbaar:
+          'Snijd de prei in heel fijne ringetjes, was hem en stoof hem in 8 minuten zacht. Roer de roomkaas en de melk erdoor.',
+      },
+      'Meng de saus met de kip en de pasta en breng op smaak met peper.',
+    ],
+    tips: {
+      verstoppen: 'Gepureerd is het gewoon een romige witte saus.',
+      weerstand: 'Begin met het witte deel van de prei; dat is het mildst.',
+      bewaren: '2 dagen in de koelkast.',
+    },
+    allergens: ['gluten', 'melk'],
+  }),
+  defineRecipe({
+    id: 'prei-pannenkoekjes',
+    name: 'Hartige pannenkoekjes met prei',
+    description: 'Kleine pannenkoekjes met kaas en fijne preiringetjes.',
+    category: 'ontbijt-bakken',
+    mainVeggie: 'prei',
+    visibility: 3,
+    nextStep: true,
+    timeMinutes: 30,
+    ingredients: [prei(1), boter(20), bloem(150), melk(250), ei(2), kaas(75)],
+    steps: [
+      'Snijd de prei in dunne ringetjes, was hem en bak hem in een klontje boter in 5 minuten zacht.',
+      'Klop de bloem, de melk en de eieren tot een glad beslag. Roer de prei en de kaas erdoor.',
+      'Bak in de rest van de boter kleine pannenkoekjes van ongeveer 2 eetlepels beslag, 2 tot 3 minuten per kant.',
+    ],
+    tips: {
+      weerstand: 'Kleine pannenkoekjes voelen als iets lekkers; de prei hoort er gewoon bij.',
+      bewaren: 'Koud ook lekker, bijvoorbeeld als lunch de volgende dag.',
+    },
+    allergens: ['gluten', 'melk', 'ei'],
+  }),
+];

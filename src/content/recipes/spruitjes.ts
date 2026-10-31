@@ -1,0 +1,98 @@
+import {
+  aardappelen,
+  bloem,
+  defineRecipe,
+  ei,
+  kaas,
+  melk,
+  nootmuskaat,
+  olie,
+  parmezaan,
+  pasta,
+  peper,
+  roomkaas,
+  spruitjes,
+} from './_helpers';
+
+export const spruitjesRecipes = [
+  defineRecipe({
+    id: 'macaroni-spruitjes-kaassaus',
+    name: 'Macaroni met spruitjes-kaassaus',
+    description: 'Kaassaus waarin zachtgekookte spruitjes hun bittertje verliezen.',
+    category: 'saus-dip',
+    mainVeggie: 'spruitjes',
+    visibility: 1,
+    timeMinutes: 25,
+    ingredients: [
+      pasta(350, 'macaroni'),
+      spruitjes(250),
+      melk(350),
+      roomkaas(50),
+      kaas(125),
+      nootmuskaat(),
+    ],
+    steps: [
+      'Kook de macaroni volgens de verpakking. Maak de spruitjes schoon en kook ze in 10 minuten heel zacht.',
+      {
+        verstopt: 'Pureer de spruitjes glad met de melk en de roomkaas.',
+        zichtbaar: 'Hak de spruitjes heel fijn en roer ze door de melk met de roomkaas.',
+      },
+      'Verwarm de saus, smelt de kaas erin en breng op smaak met nootmuskaat.',
+      'Meng de saus met de macaroni.',
+    ],
+    tips: {
+      verstoppen: 'Kaas verzacht de bittere smaak van spruitjes.',
+      weerstand: 'Bij spruitjes is proeven al knap. Ze zijn voor veel mensen even wennen.',
+      bewaren: '2 dagen in de koelkast.',
+    },
+    allergens: ['gluten', 'melk'],
+  }),
+  defineRecipe({
+    id: 'aardappel-spruitjeskoekjes',
+    name: 'Aardappel-spruitjeskoekjes',
+    description:
+      'Goudbruine koekjes van aardappel, kaas en spruitjes; met een restje puree gaat het sneller.',
+    category: 'hoofdgerecht',
+    mainVeggie: 'spruitjes',
+    visibility: 1,
+    weekend: true,
+    timeMinutes: 45,
+    ingredients: [aardappelen(600), spruitjes(200), ei(1), bloem(40), kaas(75), peper(), olie(3)],
+    steps: [
+      'Schil de aardappelen en kook ze met de schoongemaakte spruitjes in 15 minuten gaar. Laat goed uitdampen.',
+      {
+        verstopt: 'Stamp de aardappelen en de spruitjes samen tot een gladde puree.',
+        zichtbaar: 'Stamp de aardappelen en hak de spruitjes fijn.',
+      },
+      'Meng het ei, de bloem, de kaas en wat peper erdoor en vorm er 12 platte koekjes van.',
+      'Bak ze in de olijfolie in 3 tot 4 minuten per kant goudbruin.',
+    ],
+    tips: {
+      verstoppen: 'Goudbruin gebakken met kaas lijken het gewoon aardappelkoekjes.',
+      weerstand: 'Een schepje appelmoes ernaast maakt het vertrouwd.',
+      bewaren: 'Koud of opgewarmd lekker; 2 dagen in de koelkast.',
+    },
+    allergens: ['ei', 'gluten', 'melk'],
+  }),
+  defineRecipe({
+    id: 'spruitjes-oven',
+    name: 'Spruitjes uit de oven',
+    description: 'Halve spruitjes, zacht en goudbruin geroosterd, met wat kaas.',
+    category: 'snack',
+    mainVeggie: 'spruitjes',
+    visibility: 4,
+    nextStep: true,
+    timeMinutes: 25,
+    ingredients: [spruitjes(400), olie(2), parmezaan(25)],
+    steps: [
+      'Verwarm de oven voor op 210 °C. Maak de spruitjes schoon en halveer ze.',
+      'Hussel ze met de olijfolie en leg ze met de snijkant naar beneden op een bakplaat.',
+      'Bak ze 15 tot 18 minuten, tot ze zacht en goudbruin zijn, en strooi de kaas erover.',
+    ],
+    tips: {
+      weerstand: 'In de oven worden spruitjes zoeter dan gekookt. Eén halfje proeven is genoeg.',
+      veiligheid: 'Snijd ze voor jonge kinderen in vieren en zorg dat ze goed zacht zijn.',
+    },
+    allergens: ['melk'],
+  }),
+];

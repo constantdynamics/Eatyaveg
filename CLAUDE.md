@@ -1,14 +1,16 @@
-# Familie Vriendelijk — projectregels
+# Proeftuin — projectregels
 
-PWA voor ouders van peuters: groenten verstoppen in recepten, aantikken wat het kind proefde, en
-een groentetuin waarin vriendjes groeien. Volledige briefing: `BRIEFING.md`. Beslissingen en
+PWA voor ouders van peuters (werktitel Familie Vriendelijk): groenten verstoppen in recepten,
+aantikken wat het kind proefde, en een tuin waarin groentevriendjes groeien. Volledige briefing: `BRIEFING.md`. Beslissingen en
 afwijkingen: `DECISIONS.md`.
 
 ## Stack en commando's
 
-Vite + React + TypeScript (strict) · Tailwind CSS v4 (tokens in `src/styles/tokens.css`) ·
-React Router (`HashRouter`) · Zustand + persist naar IndexedDB (`idb-keyval`) · Zod ·
-vite-plugin-pwa · lucide-react · Vitest + Testing Library · Playwright.
+Vite 8 + React 19 + TypeScript 6 (strict) · Tailwind CSS v4 (tokens in `src/styles/tokens.css`,
+groentekleuren in `src/styles/veggies.css`) · React Router 8 (`HashRouter`) · Zustand + persist naar
+IndexedDB (`idb-keyval`) via repositories · `zod/mini` in de app, volledige Zod in de
+contentvalidatie · vite-plugin-pwa · lucide-react · `Intl` voor datums · Vitest + Testing Library ·
+Playwright + axe.
 
 ```bash
 npm run dev               # ontwikkelserver
@@ -20,7 +22,9 @@ npm run e2e               # Playwright-smoke (bouwt en serveert zelf)
 npm run screenshots       # screenshots op de maten uit §16
 ```
 
-Na elke wijziging: lint, test, validate:content en build groen.
+Na elke wijziging: lint, test, validate:content en build groen. Bij UI-werk ook `npm run e2e`
+en `npm run screenshots`, en de screenshots kritisch naast de rust-regels leggen.
+Dev-paneel: `?dev=1` vóór de `#` (tijd verschuiven, fase zetten, momenten opnieuw, fps-meter).
 
 ## Niet onderhandelbaar (§2)
 
@@ -58,6 +62,10 @@ pulserends of stuiterends · recepten krijgen de illustratie van hun hoofdgroent
 - Kindscherm zonder tekst; Ouder-knop pas na 1,5 s vasthouden.
 - Icoonknoppen altijd met toegankelijke naam (`IconButton` vereist `label`).
 - Taal telt: "Recept van vandaag", geen anglicismen.
+- Store-selectors nooit `?? []` of `?? {}` laten teruggeven (oneindige render-lus); gebruik een
+  constante buiten de selector.
+- Kindzinnen alleen in `src/content/lines.ts`; nooit "moet", "gezond" of eten als beloning
+  (`validate:content` controleert dat).
 
 ## Structuur
 

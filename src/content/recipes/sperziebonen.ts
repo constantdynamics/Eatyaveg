@@ -1,0 +1,111 @@
+import {
+  defineRecipe,
+  gehakt,
+  kaas,
+  knoflook,
+  olie,
+  oregano,
+  parmezaan,
+  pasta,
+  peper,
+  roomkaas,
+  sperziebonen,
+  tomatenblokjes,
+  ui,
+} from './_helpers';
+
+export const sperziebonenRecipes = [
+  defineRecipe({
+    id: 'pasta-groene-bonensaus',
+    name: 'Pasta met groene bonensaus',
+    description: 'Gladde groene saus van zachtgekookte boontjes en kaas.',
+    category: 'saus-dip',
+    mainVeggie: 'sperziebonen',
+    visibility: 1,
+    timeMinutes: 25,
+    ingredients: [
+      pasta(350, 'penne'),
+      sperziebonen(250),
+      roomkaas(100),
+      parmezaan(30),
+      knoflook(0.5),
+      olie(2),
+      peper(),
+    ],
+    steps: [
+      'Kook de penne volgens de verpakking.',
+      'Haal de puntjes van de sperziebonen, snijd ze in stukjes en kook ze in 10 minuten heel zacht; kook de knoflook de laatste 2 minuten mee, dan wordt hij milder.',
+      {
+        verstopt:
+          'Pureer de boontjes glad met de roomkaas, de Parmezaanse kaas, de knoflook en de olijfolie.',
+        zichtbaar:
+          'Hak de boontjes heel fijn en meng ze met de roomkaas, de Parmezaanse kaas, de knoflook en de olijfolie.',
+      },
+      'Meng de saus met de penne en een scheutje kookvocht. Breng op smaak met peper.',
+    ],
+    tips: {
+      verstoppen: 'Goed gaar gekookte boontjes worden een zachte, romige saus.',
+      weerstand:
+        'Vraagt je kind wat het is? Vertel het eerlijk: groene bonensaus. Zonder er een groot ding van te maken.',
+      bewaren: '2 dagen in de koelkast.',
+    },
+    allergens: ['gluten', 'melk'],
+  }),
+  defineRecipe({
+    id: 'macaroni-gehakt-boontjes',
+    name: 'Macaroni met gehakt en boontjes',
+    description: 'Vertrouwde macaroni met tomaat, waarin de boontjes meeliften.',
+    category: 'hoofdgerecht',
+    mainVeggie: 'sperziebonen',
+    veggies: ['sperziebonen', 'tomaat'],
+    visibility: 1,
+    timeMinutes: 25,
+    ingredients: [
+      pasta(300, 'macaroni'),
+      sperziebonen(200),
+      gehakt(300),
+      ui(1),
+      tomatenblokjes(1),
+      oregano(1),
+      peper(),
+      { ...kaas(50), optional: true },
+    ],
+    steps: [
+      'Kook de macaroni volgens de verpakking. Kook de sperziebonen in 10 minuten zacht.',
+      'Snipper de ui en bak hem met het gehakt rul.',
+      {
+        verstopt: 'Pureer de boontjes met de tomatenblokjes en doe dit bij het gehakt.',
+        zichtbaar: 'Snijd de boontjes heel fijn en doe ze met de tomatenblokjes bij het gehakt.',
+      },
+      'Voeg de oregano toe, laat 5 minuten pruttelen en meng met de macaroni. Strooi er kaas over als je wilt.',
+    ],
+    tips: {
+      verstoppen: 'Gepureerd door de tomatensaus valt het groen nauwelijks op.',
+      weerstand: 'Macaroni is vaak al vertrouwd: daar mag een nieuwe smaak in meeliften.',
+      bewaren: 'Kan 3 maanden in de vriezer.',
+    },
+    allergens: ['gluten', 'melk'],
+  }),
+  defineRecipe({
+    id: 'boontjesfrietjes',
+    name: 'Boontjesfrietjes met kaas',
+    description: 'Zachte boontjes uit de oven, te eten met je vingers.',
+    category: 'snack',
+    mainVeggie: 'sperziebonen',
+    visibility: 4,
+    nextStep: true,
+    timeMinutes: 25,
+    ingredients: [sperziebonen(400), olie(1), parmezaan(30)],
+    steps: [
+      'Verwarm de oven voor op 210 °C. Haal de puntjes van de boontjes.',
+      'Kook de boontjes 4 minuten voor en laat ze goed uitlekken.',
+      'Hussel ze met de olijfolie, verdeel ze over een bakplaat en strooi de kaas erover.',
+      'Bak ze in 12 minuten krokant aan de buitenkant en zacht vanbinnen.',
+    ],
+    tips: {
+      weerstand: 'Eet ze met je vingers, net als frietjes.',
+      veiligheid: 'Snijd de boontjes voor kleine kinderen in korte stukjes.',
+    },
+    allergens: ['melk'],
+  }),
+];

@@ -1,0 +1,111 @@
+import {
+  aardappelen,
+  bloemkool,
+  boter,
+  defineRecipe,
+  gehakt,
+  kaas,
+  melk,
+  nootmuskaat,
+  olie,
+  parmezaan,
+  pasta,
+  peper,
+  tomatenblokjes,
+  ui,
+} from './_helpers';
+
+export const bloemkoolRecipes = [
+  defineRecipe({
+    id: 'macaroni-bloemkool-kaassaus',
+    name: 'Macaroni met bloemkool-kaassaus',
+    description: 'Romige kaassaus die voor de helft uit bloemkool bestaat.',
+    category: 'saus-dip',
+    mainVeggie: 'bloemkool',
+    visibility: 1,
+    timeMinutes: 25,
+    ingredients: [
+      pasta(350, 'macaroni'),
+      bloemkool(400),
+      melk(300),
+      kaas(100),
+      nootmuskaat(),
+      peper(),
+    ],
+    steps: [
+      'Kook de macaroni volgens de verpakking.',
+      'Kook de bloemkoolroosjes in 10 minuten heel zacht en giet ze af.',
+      {
+        verstopt: 'Pureer de bloemkool glad met de melk.',
+        zichtbaar: 'Pureer de helft van de bloemkool met de melk en hak de rest fijn.',
+      },
+      'Warm de saus op, smelt de kaas erin, breng op smaak met nootmuskaat en peper en meng met de macaroni.',
+    ],
+    tips: {
+      verstoppen: 'Bloemkool maakt de saus romig; je proeft vooral kaas.',
+      weerstand: 'Strooi samen een beetje extra kaas over het bord.',
+      bewaren: '2 dagen in de koelkast. Warm op met een scheutje melk.',
+    },
+    allergens: ['gluten', 'melk'],
+  }),
+  defineRecipe({
+    id: 'gehaktschotel-bloemkoolpuree',
+    name: 'Gehaktschotel met bloemkoolpuree',
+    description: 'Gehakt in tomatensaus onder een deken van aardappel-bloemkoolpuree.',
+    category: 'hoofdgerecht',
+    mainVeggie: 'bloemkool',
+    veggies: ['bloemkool', 'tomaat'],
+    visibility: 1,
+    timeMinutes: 30,
+    ingredients: [
+      aardappelen(700),
+      bloemkool(400),
+      gehakt(400),
+      ui(1),
+      tomatenblokjes(1),
+      melk(100),
+      boter(15),
+      nootmuskaat(),
+      peper(),
+    ],
+    steps: [
+      'Breng water aan de kook (een waterkoker gaat het snelst). Schil de aardappelen, snijd ze klein en kook ze met de bloemkoolroosjes in 15 minuten gaar.',
+      'Snipper de ui en bak hem met het gehakt rul. Voeg de tomatenblokjes toe en laat 5 minuten pruttelen.',
+      {
+        verstopt:
+          'Stamp de aardappelen en bloemkool met de melk en de boter tot een gladde puree. Breng op smaak met nootmuskaat en peper.',
+        zichtbaar:
+          'Stamp de aardappelen en bloemkool grof met de melk en de boter. Breng op smaak met nootmuskaat en peper.',
+      },
+      'Schep het gehakt in een schaal en verdeel de puree erover. Wie tijd heeft, zet de schaal nog 8 minuten onder de grill voor een goudbruin korstje.',
+    ],
+    tips: {
+      verstoppen: 'In de puree is bloemkool niet te onderscheiden van aardappel.',
+      weerstand:
+        'Laat je kind met een vork een patroon in de puree tekenen voor de schotel de oven in gaat.',
+      bewaren: 'Kan in porties in de vriezer.',
+    },
+    allergens: ['melk'],
+  }),
+  defineRecipe({
+    id: 'bloemkoolwolkjes',
+    name: 'Bloemkoolwolkjes uit de oven',
+    description: 'Kleine roosjes, zacht vanbinnen, met een korstje kaas.',
+    category: 'snack',
+    mainVeggie: 'bloemkool',
+    visibility: 4,
+    nextStep: true,
+    timeMinutes: 25,
+    ingredients: [bloemkool(500), olie(2), parmezaan(30)],
+    steps: [
+      'Verwarm de oven voor op 210 °C. Snijd de bloemkool in kleine roosjes.',
+      'Hussel de roosjes met de olijfolie en verdeel ze over een bakplaat met bakpapier.',
+      'Bak ze 15 minuten, strooi de Parmezaanse kaas erover en bak nog 5 minuten.',
+    ],
+    tips: {
+      weerstand: 'Zet een schaaltje op tafel waar iedereen uit mag pakken, jij ook.',
+      veiligheid: 'Kies voor de kleinsten zachte, kleine roosjes.',
+    },
+    allergens: ['melk'],
+  }),
+];

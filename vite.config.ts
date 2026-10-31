@@ -40,6 +40,9 @@ const isTest = process.env.VITEST === 'true';
 
 export default defineConfig({
   base: './',
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? '1.0.0'),
+  },
   build: {
     target: 'es2022',
     // Geen data:-URI's voor fonts en assets: houdt de CSP strikt en de precache voorspelbaar.
@@ -57,10 +60,10 @@ export default defineConfig({
         includeAssets: ['icons/*.png', 'icons/*.svg'],
         manifest: {
           id: './',
-          name: 'Familie Vriendelijk',
-          short_name: 'Groentetuin',
+          name: 'Proeftuin',
+          short_name: 'Proeftuin',
           description:
-            'Groenten verstoppen in familierecepten, aantikken wat je kind proefde en samen de groentetuin zien groeien.',
+            'Groenten verstoppen in familierecepten, aantikken wat je kind proefde en samen de groentevriendjes zien groeien.',
           lang: 'nl',
           dir: 'ltr',
           start_url: './',

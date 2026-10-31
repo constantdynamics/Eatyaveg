@@ -1,0 +1,124 @@
+/* Animaties van de vriendjes: alleen transform en opacity (§8.4). */
+.fv-char {
+  overflow: visible;
+}
+
+.fv-char--animated .fv-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fv-blink 4.8s infinite;
+  animation-delay: var(--fv-delay, 0s);
+}
+
+.fv-char--animated .fv-breathe {
+  transform-origin: 100px 232px;
+  animation: fv-breathe 3.6s ease-in-out infinite;
+  animation-delay: var(--fv-delay, 0s);
+}
+
+.fv-char--animated .fv-arm-wave {
+  animation: fv-wave 0.7s ease-in-out infinite alternate;
+}
+
+.fv-char--animated .fv-arm-dance-l {
+  animation: fv-swing 0.45s ease-in-out infinite alternate;
+}
+
+.fv-char--animated .fv-arm-dance-r {
+  animation: fv-swing 0.45s ease-in-out infinite alternate-reverse;
+}
+
+.fv-char--animated .fv-arm-swing-l {
+  animation: fv-swing-small 0.5s ease-in-out infinite alternate;
+}
+
+.fv-char--animated .fv-arm-swing-r {
+  animation: fv-swing-small 0.5s ease-in-out infinite alternate-reverse;
+}
+
+.fv-char--animated .fv-leg-walk-l,
+.fv-char--animated .fv-leg-dance-l {
+  animation: fv-step 0.5s ease-in-out infinite alternate;
+}
+
+.fv-char--animated .fv-leg-walk-r,
+.fv-char--animated .fv-leg-dance-r {
+  animation: fv-step 0.5s ease-in-out infinite alternate-reverse;
+}
+
+.fv-char--animated .fv-dance-body {
+  transform-origin: 100px 232px;
+  animation: fv-dance-body 0.45s ease-in-out infinite alternate;
+}
+
+@keyframes fv-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes fv-breathe {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.012, 0.986);
+  }
+}
+
+@keyframes fv-wave {
+  from {
+    transform: rotate(-14deg);
+  }
+  to {
+    transform: rotate(14deg);
+  }
+}
+
+@keyframes fv-swing {
+  from {
+    transform: rotate(-16deg);
+  }
+  to {
+    transform: rotate(16deg);
+  }
+}
+
+@keyframes fv-swing-small {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes fv-step {
+  from {
+    transform: rotate(-12deg);
+  }
+  to {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes fv-dance-body {
+  from {
+    transform: translateY(0) rotate(-4deg);
+  }
+  to {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fv-char--animated * {
+    animation: none !important;
+  }
+}

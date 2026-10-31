@@ -1,6 +1,6 @@
 /** UI-teksten van de ouder-app. Kort, warm en nooit belerend (§14.3). */
 export const nl = {
-  appName: 'Familie Vriendelijk',
+  appName: 'Proeftuin',
   nav: {
     today: 'Vandaag',
     recipes: 'Recepten',

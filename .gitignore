@@ -10,3 +10,4 @@ blob-report
 .vite
 *.tsbuildinfo
 tests/e2e/.auth
+/screenshots/

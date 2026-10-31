@@ -1,29 +1,25 @@
-import { format, formatDistanceStrict, parseISO } from 'date-fns';
-import { nl } from 'date-fns/locale';
+/** Datums in het Nederlands via Intl (ingebouwd in de browser, geen extra bundel). */
+const LONG = new Intl.DateTimeFormat('nl-NL', { weekday: 'long', day: 'numeric', month: 'long' });
+const SHORT = new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'short' });
+const TIME = new Intl.DateTimeFormat('nl-NL', { hour: '2-digit', minute: '2-digit' });
 
 /** Kalenderdag in lokale tijd, 'yyyy-MM-dd'. */
 export function dayKey(date: Date): string {
-  return format(date, 'yyyy-MM-dd');
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
 }
 
-export function dayKeyOfIso(iso: string): string {
-  return dayKey(parseISO(iso));
-}
-
+/** "zaterdag 31 oktober" */
 export function formatDate(iso: string): string {
-  return format(parseISO(iso), 'EEEE d MMMM', { locale: nl });
+  return LONG.format(new Date(iso));
 }
 
-export function formatDateShort(iso: string): string {
-  return format(parseISO(iso), 'd MMM', { locale: nl });
-}
-
+/** "31 okt. om 12:51" */
 export function formatDateTime(iso: string): string {
-  return format(parseISO(iso), "d MMM 'om' HH:mm", { locale: nl });
-}
-
-export function formatAgo(iso: string, now: Date): string {
-  return formatDistanceStrict(parseISO(iso), now, { locale: nl, addSuffix: true });
+  const d = new Date(iso);
+  return `${SHORT.format(d)} om ${TIME.format(d)}`;
 }
 
 export function isWeekendDay(date: Date): boolean {
