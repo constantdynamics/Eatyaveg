@@ -123,3 +123,50 @@ Per beslissing: wat, waarom, welk alternatief, en hoe terug te draaien.
   druppel, fontein, woesj, tik), zacht afgesteld (masterniveau 0,45).
 - **Waarom:** geen licenties of downloads nodig, klein, en altijd offline.
 - **Terugdraaien:** `src/audio/sounds.ts`.
+
+## D17 — Actuele versies (oktober 2026)
+
+- **Wat:** Vite 8, React 19.3, React Router 8 (`HashRouter` uit `react-router`), Zustand 5, Zod 4,
+  Tailwind CSS 4.3, vite-plugin-pwa 2, Vitest 5, ESLint 10. `@playwright/test` staat op 1.63 zodat
+  het de voorgeïnstalleerde Chromium van de bouwomgeving vindt (CI draait alleen de unit-tests).
+- **Terugdraaien/bijwerken:** `package.json`; voor Playwright 1.64+ eerst `npx playwright install`.
+
+## D18 — `zod/mini` in de app, `Intl` in plaats van date-fns, luie schermen
+
+- **Wat:** het inladen en importeren van opgeslagen data gebruikt `zod/mini` (zelfde regels, veel
+  kleiner); datums via `Intl.DateTimeFormat('nl-NL')`; recepten, boodschappen, instellingen,
+  hulp, onboarding, groente-detail, kookmodus en tuin worden pas geladen als ze nodig zijn (en in
+  rust alvast vooruit geladen).
+- **Waarom:** opstart-JavaScript van ongeveer 600 naar 440 kB; Lighthouse mobiel performance 91
+  (toegankelijkheid 100, best practices 100).
+- **Alternatief:** date-fns met nl-locale (zoals de briefing voorstelt) en volledige Zod overal.
+- **Terugdraaien:** `src/lib/dates.ts`, `src/store/schema.ts`, `src/app/App.tsx`.
+
+## D19 — Groentenlijst in `veggies[]` volledig
+
+- **Wat:** elke groente die in de ingrediënten zit, staat ook in `veggies[]` (dus ook tomaat in
+  sauzen met passata). `validate:content` dwingt dat af.
+- **Waarom:** bij "We hebben dit gegeten" tellen alle groenten mee (§9.3); eerlijk tellen helpt.
+- **Terugdraaien:** de controle `VEGGIE_KEYWORDS` in `src/content/validate.ts`.
+
+## D20 — Voedingsadviezen zonder directe bron in de bouwomgeving
+
+- **Wat:** voedingscentrum.nl was vanuit de bouwomgeving niet bereikbaar. De tips volgen de bekende
+  adviezen (geen hele noten onder 4 jaar, druiven en cherrytomaten in de lengte in vieren, weinig
+  zout, geen honing onder 1 jaar, nitraatrijke groenten ook vaker per week en niet met vis,
+  smoothies af en toe, hele groente en fruit blijft het fijnst), behoudend geformuleerd.
+- **Te doen:** de PO laat de teksten in `src/content/tips.ts` en de recepttips nog één keer naast
+  de actuele pagina's van het Voedingscentrum leggen.
+
+## D21 — Smoothienamen en "Superheldendrankje"
+
+- **Wat:** smoothies hebben Nederlandse, beschrijvende namen; het prototype-"Superheldendrankje"
+  heet nu "Paarse bessensmoothie".
+- **Waarom:** een naam die kracht aan eten koppelt, voelt als een gezondheidsclaim (§13.2); de
+  kracht van de vriendjes hoort bij de spelfantasie in de tuin.
+
+## D22 — Zelf toevoegen op de boodschappenlijst komt onder "Overig"
+
+- **Wat:** zelf toegevoegde items krijgen afdeling "Overig" in plaats van een afdelingskeuze.
+- **Waarom:** één invoerveld is rustiger; de lijst blijft overzichtelijk.
+- **Terugdraaien:** `addManualItem(name, section)` ondersteunt al een afdeling.
