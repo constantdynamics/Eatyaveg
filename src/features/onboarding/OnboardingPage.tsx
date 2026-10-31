@@ -63,10 +63,10 @@ function Welcome({ onNext }: { onNext: () => void }) {
         <VeggieIcon id="wortel" size={96} />
         <VeggieIcon id="tomaat" size={64} />
       </div>
-      <StepHeading>Welkom bij Familie Vriendelijk</StepHeading>
+      <StepHeading>Welkom in de Proeftuin</StepHeading>
       <p className="mt-3 text-lg text-ink-soft">
         Verstop groenten in familierecepten en tik na het eten aan wat je kind heeft geproefd. In de
-        groentetuin ziet je kind de groentevriendjes daarna groeien.
+        tuin ziet je kind de groentevriendjes daarna groeien.
       </p>
       <p className="mt-3 text-ink-soft">Alles blijft op dit apparaat. Geen account nodig.</p>
       <Button variant="primary" size="lg" block className="mt-8" onClick={onNext}>

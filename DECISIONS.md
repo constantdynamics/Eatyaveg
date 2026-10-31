@@ -34,7 +34,7 @@ Per beslissing: wat, waarom, welk alternatief, en hoe terug te draaien.
 - **Waarom:** past in de pure groeifunctie zonder aparte uitzonderingen.
 - **Terugdraaien:** die registraties zijn per groente te verwijderen in de geschiedenis.
 
-## D5 — Korte naam op het beginscherm: "Groentetuin"
+## D5 — Korte naam op het beginscherm (vervangen door D24)
 
 - **Wat:** `short_name` in het manifest is "Groentetuin"; de volledige naam blijft "Familie
   Vriendelijk".
@@ -155,8 +155,7 @@ Per beslissing: wat, waarom, welk alternatief, en hoe terug te draaien.
   adviezen (geen hele noten onder 4 jaar, druiven en cherrytomaten in de lengte in vieren, weinig
   zout, geen honing onder 1 jaar, nitraatrijke groenten ook vaker per week en niet met vis,
   smoothies af en toe, hele groente en fruit blijft het fijnst), behoudend geformuleerd.
-- **Te doen:** de PO laat de teksten in `src/content/tips.ts` en de recepttips nog één keer naast
-  de actuele pagina's van het Voedingscentrum leggen.
+- **Besluit PO (31-10-2026):** een extra controle naast de actuele site is niet nodig.
 
 ## D21 — Smoothienamen en "Superheldendrankje"
 
@@ -201,3 +200,12 @@ Verwerkt:
 
 Niet overgenomen, met reden: de tuin in portret op een telefoon blijft kleiner (landscape-first,
 §8.1); alle zones blijven volledig in beeld, zodat geen vriendje onvindbaar wordt.
+
+## D24 — De app heet Proeftuin
+
+- **Wat:** de PO koos de naam "Proeftuin" (werktitel was "Familie Vriendelijk"). Die naam staat in
+  de titel, het manifest (ook de korte naam op het beginscherm), de onboarding ("Welkom in de
+  Proeftuin"), Over en de naam van het back-upbestand. Omdat er nog geen gebruikers waren, heten
+  ook de IndexedDB-database en de export-id nu `proeftuin`. Interne voorvoegsels (`fv:` in de
+  opslag, `fv-` in CSS) zijn ongewijzigd gebleven.
+- **Terugdraaien:** `src/config/app.ts`, `src/i18n/nl.ts`, `index.html`, `vite.config.ts`.

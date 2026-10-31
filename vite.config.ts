@@ -60,10 +60,10 @@ export default defineConfig({
         includeAssets: ['icons/*.png', 'icons/*.svg'],
         manifest: {
           id: './',
-          name: 'Familie Vriendelijk',
-          short_name: 'Groentetuin',
+          name: 'Proeftuin',
+          short_name: 'Proeftuin',
           description:
-            'Groenten verstoppen in familierecepten, aantikken wat je kind proefde en samen de groentetuin zien groeien.',
+            'Groenten verstoppen in familierecepten, aantikken wat je kind proefde en samen de groentevriendjes zien groeien.',
           lang: 'nl',
           dir: 'ltr',
           start_url: './',

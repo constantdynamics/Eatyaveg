@@ -473,7 +473,7 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
       ref={containerRef}
       className={`fv-garden ${overview ? 'fv-garden--overview' : ''}`}
       role="application"
-      aria-label={`Groentetuin van ${child.name}`}
+      aria-label={`Proeftuin van ${child.name}`}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

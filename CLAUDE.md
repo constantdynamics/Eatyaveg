@@ -1,7 +1,7 @@
-# Familie Vriendelijk — projectregels
+# Proeftuin — projectregels
 
-PWA voor ouders van peuters: groenten verstoppen in recepten, aantikken wat het kind proefde, en
-een groentetuin waarin vriendjes groeien. Volledige briefing: `BRIEFING.md`. Beslissingen en
+PWA voor ouders van peuters (werktitel Familie Vriendelijk): groenten verstoppen in recepten,
+aantikken wat het kind proefde, en een tuin waarin groentevriendjes groeien. Volledige briefing: `BRIEFING.md`. Beslissingen en
 afwijkingen: `DECISIONS.md`.
 
 ## Stack en commando's

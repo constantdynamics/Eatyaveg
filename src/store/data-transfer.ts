@@ -17,7 +17,7 @@ export function createExport(state: PersistedState, nowIso: string): ExportFile 
 }
 
 export function exportFilename(nowIso: string): string {
-  return `familie-vriendelijk-${nowIso.slice(0, 10)}.json`;
+  return `proeftuin-${nowIso.slice(0, 10)}.json`;
 }
 
 export type ImportResult =
@@ -39,7 +39,7 @@ export function parseImport(text: string, nowIso: string): ImportResult {
   }
   const file = exportFileSchema.safeParse(json);
   if (!file.success) {
-    return { ok: false, error: 'Dit lijkt geen back-up van Familie Vriendelijk.' };
+    return { ok: false, error: 'Dit lijkt geen back-up van de Proeftuin.' };
   }
   try {
     const migrated = migrate(file.data.data, file.data.schemaVersion);

@@ -15,14 +15,14 @@ test('Mijn data: exporteren, alles wissen (dubbel bevestigd) en weer importeren'
   ]);
   const file = await download.path();
   const backup = JSON.parse(readFileSync(file, 'utf8'));
-  expect(backup.app).toBe('familie-vriendelijk');
+  expect(backup.app).toBe('proeftuin');
   expect(backup.data.children[0].name).toBe('Noor');
   expect(backup.data.eatEvents).toHaveLength(2);
 
   await page.getByRole('button', { name: 'Alles wissen' }).click();
   await page.getByRole('button', { name: 'Ja, wissen' }).click();
   await page.getByRole('button', { name: 'Definitief wissen' }).click();
-  await expect(page.getByRole('heading', { name: 'Welkom bij Familie Vriendelijk' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Welkom in de Proeftuin' })).toBeVisible();
 
   // Na wissen: opnieuw beginnen en de back-up terugzetten.
   await onboard(page, [{ name: 'Tijdelijk' }]);

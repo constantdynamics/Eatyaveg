@@ -1,14 +1,15 @@
-# Familie Vriendelijk
+# Proeftuin
 
 *Groenten verstoppen, aantikken en zien groeien: een app voor ouders van peuters.*
 
-Een installeerbare webapp (PWA) voor ouders en verzorgers van kinderen van 2 tot 5 jaar:
+Een installeerbare webapp (PWA) voor ouders en verzorgers van kinderen van 2 tot 5 jaar
+(werktitel was Familie Vriendelijk):
 
 - **Recepten** (56): per groente een saus of dip en een hoofdgerecht met de varianten
   *extra verstopt* en *licht zichtbaar*, een *Volgende stap*-recept richting herkenbare groente,
   10 smoothies en 4 weekendrecepten. Porties om te rekenen, allergenen, tips.
 - **Aantikken**: na het eten met één of twee tikken vastleggen wat er geproefd is. Eén hapje telt.
-- **Groentetuin** (kindscherm, zonder leestekst): 14 groentevriendjes groeien van zo klein als een
+- **De tuin** (kindscherm, zonder leestekst): 14 groentevriendjes groeien van zo klein als een
   mier tot zo groot als een walvis, met druppels als tussenstap, een dansje, confetti, een
   geluidje en een stem, en bij elke fase een nieuwe kracht.
 - **Praktisch**: boodschappenlijst uit gekozen recepten en een kookmodus zonder timer.

@@ -7,7 +7,7 @@ export async function onboard(
   query = '',
 ) {
   await page.goto(`./${query}#/welkom`);
-  await expect(page.getByRole('heading', { name: 'Welkom bij Familie Vriendelijk' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Welkom in de Proeftuin' })).toBeVisible();
   await page.getByRole('button', { name: 'Beginnen' }).click();
   for (let i = 1; i < children.length; i++) {
     await page.getByRole('button', { name: 'Nog een kind toevoegen' }).click();
@@ -35,7 +35,7 @@ export async function firstChildId(page: Page): Promise<string> {
   return page.evaluate(
     () =>
       new Promise<string>((resolve) => {
-        const req = indexedDB.open('familie-vriendelijk');
+        const req = indexedDB.open('proeftuin');
         req.onsuccess = () => {
           const get = req.result.transaction('kv').objectStore('kv').get('fv:v1:children');
           get.onsuccess = () => resolve((get.result as { id: string }[])[0]!.id);

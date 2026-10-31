@@ -1,4 +1,6 @@
-# Eindrapport — Familie Vriendelijk (fase 1)
+# Eindrapport — Proeftuin (fase 1)
+
+*Werktitel was Familie Vriendelijk; de PO koos de naam Proeftuin (D24).*
 
 *Opgeleverd op 31 oktober 2026 op branch `ccr-c0840aad-ptpv5e`.*
 
@@ -38,7 +40,7 @@ GitHub Pages op *GitHub Actions* staat (zie README), publiceert de workflow de a
   (kwaliteit verschilt per apparaat; headless Chromium heeft geen Nederlandse stem), 60 fps op een
   gemiddelde tablet. De app valt stil terug: zonder Nederlandse stem alleen geluid en beweging.
 - **Voedingscentrum** was vanuit de bouwomgeving niet bereikbaar; de tips volgen de bekende
-  adviezen, behoudend geformuleerd (D20). Laat ze nog één keer naast de actuele site leggen.
+  adviezen, behoudend geformuleerd (D20). De PO vindt een extra controle niet nodig.
 - **Portret op een telefoon**: de tuin is bruikbaar maar kleiner (landscape-first, zoals bedoeld).
 - **Terugknop van Android/browser** wordt in de tuin niet onderschept (D15); de hulp-pagina legt
   Begeleide toegang en App vastzetten uit.
@@ -83,58 +85,14 @@ Verwerkt (details in `DECISIONS.md` D23):
 Bewust niet overgenomen: de tuin in portret op een telefoon blijft kleiner (landscape-first), omdat
 inzoomen ten koste zou gaan van het altijd vindbaar zijn van elk vriendje.
 
-## Naamvoorstellen
+## Naam
 
-1. **Proeftuin** — een proeftuin is een plek om te proberen, en proeven is precies wat telt.
-2. **Groentetuin** — de naam die het kind al kent; ook de korte naam op het beginscherm.
-3. **Groeivriendjes** — zegt meteen wat er gebeurt.
-4. **Hapjestuin** — één hapje telt.
-5. **Moestuinmaatjes** — warm en speels.
-6. **Smaakmaatjes** — voor kinderen die samen leren proeven.
-7. **Eén Hapje** — de kernboodschap als naam.
-8. **Verstopt & Gevonden** — van verstopte naar herkenbare groente.
+Gekozen door de PO: **Proeftuin**: een plek om te proberen, en proeven is precies wat telt. De
+andere voorstellen waren Groentetuin, Groeivriendjes, Hapjestuin, Moestuinmaatjes, Smaakmaatjes,
+Eén Hapje en Verstopt & Gevonden.
 
-## Vragen voor de PO
+## Besluiten van de PO (31-10-2026)
 
-1. Mag ik een `main`-branch aanmaken vanaf deze branch, zodat GitHub Pages de app kan publiceren en ik een pull request kan openen?
-
-   a. Ja, maak `main` aan, zet hem als standaardbranch en open een pull request
-
-   b. Ja, maar maak alleen `main` aan; Pages aanzetten doe ik zelf
-
-   c. Nee, ik maak `main` zelf aan en laat het je weten
-
-   d. Publiceer liever eerst een testversie op Netlify
-
-   e. Publiceer liever eerst een testversie op Vercel
-
-   f. Nog niet publiceren; ik wil eerst zelf lokaal kijken
-
-2. Welke naam krijgt de app?
-
-   a. Familie Vriendelijk houden
-
-   b. Proeftuin
-
-   c. Groentetuin
-
-   d. Groeivriendjes
-
-   e. Hapjestuin
-
-   f. Moestuinmaatjes
-
-   g. Een eigen naam, die ik doorgeef
-
-3. Wie legt de voedingstips nog één keer naast de actuele adviezen van het Voedingscentrum (die site was vanuit de bouwomgeving niet bereikbaar)?
-
-   a. Ik doe dat zelf en geef wijzigingen door
-
-   b. Een diëtist of jeugdverpleegkundige uit ons netwerk
-
-   c. Jij, in een volgende sessie waarin voedingscentrum.nl wel bereikbaar is
-
-   d. Niet nodig, de huidige formulering is goed genoeg
-
-   e. Eerst alleen de veiligheidstips (verslikken, honing, zout) laten checken
-
+1. `main` aanmaken, standaardbranch maken, een pull request openen en de app online zetten.
+2. De naam wordt Proeftuin.
+3. Een extra controle van de voedingstips bij het Voedingscentrum is niet nodig.

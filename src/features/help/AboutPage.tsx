@@ -7,13 +7,12 @@ export function AboutPage() {
       <PageHeader title="Over deze app" back="/instellingen" />
       <section className="fv-card mb-4 p-5" aria-labelledby="o-wat">
         <h2 id="o-wat" className="text-xl">
-          Familie Vriendelijk
+          Proeftuin
         </h2>
         <p className="mt-2">
           Een app voor ouders en verzorgers van kinderen van 2 tot 5 jaar. Je verstopt groenten in
-          familierecepten, tikt aan wat je kind heeft geproefd, en in de groentetuin groeien de
-          vriendjes mee. Verstoppen is een hulpmiddel: de app helpt stap voor stap naar herkenbare
-          groente.
+          familierecepten, tikt aan wat je kind heeft geproefd, en in de tuin groeien de vriendjes
+          mee. Verstoppen is een hulpmiddel: de app helpt stap voor stap naar herkenbare groente.
         </p>
       </section>
 

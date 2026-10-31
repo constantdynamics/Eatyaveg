@@ -119,7 +119,7 @@ export const metaSchema = z.object({
 });
 
 export const exportFileSchema = z.object({
-  app: z.literal('familie-vriendelijk'),
+  app: z.literal('proeftuin'),
   schemaVersion: z.int().check(z.minimum(1)),
   exportedAt: isoSchema,
   data: z.unknown(),

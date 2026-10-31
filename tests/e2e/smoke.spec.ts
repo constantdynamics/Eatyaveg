@@ -70,7 +70,7 @@ test('vertrekken tijdens een moment: het moment blijft bewaard voor het volgende
   const seen = await page.evaluate(
     (cid) =>
       new Promise<unknown>((resolve) => {
-        const req = indexedDB.open('familie-vriendelijk');
+        const req = indexedDB.open('proeftuin');
         req.onsuccess = () => {
           const get = req.result.transaction('kv').objectStore('kv').get('fv:v1:snapshots');
           get.onsuccess = () => {
