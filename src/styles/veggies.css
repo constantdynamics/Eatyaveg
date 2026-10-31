@@ -1,0 +1,80 @@
+/*
+ * Kleuren per groente (§14.3). Alleen voor illustraties en kleine accenten,
+ * nooit voor kaders, badges of achtergronden in de ouder-app.
+ */
+:root {
+  --veg-stem: #8a6a45;
+  --veg-ink: #2b2722;
+  --veg-cheek: #f4a3a0;
+  --veg-eye-white: #ffffff;
+
+  --veg-wortel-body: #f08a3c;
+  --veg-wortel-shade: #d9712a;
+  --veg-wortel-accent: #f6b27a;
+  --veg-wortel-leaf: #5e9e5a;
+
+  --veg-courgette-body: #4e8b4a;
+  --veg-courgette-shade: #3b6e39;
+  --veg-courgette-accent: #9cc47f;
+  --veg-courgette-leaf: #7aa35a;
+
+  --veg-pompoen-body: #f2a03d;
+  --veg-pompoen-shade: #d9852a;
+  --veg-pompoen-accent: #f7c37a;
+  --veg-pompoen-leaf: #6b9e4a;
+
+  --veg-komkommer-body: #3f7a3f;
+  --veg-komkommer-shade: #2e5f31;
+  --veg-komkommer-accent: #a8cf8e;
+  --veg-komkommer-leaf: #f2d55b;
+
+  --veg-tomaat-body: #e5533d;
+  --veg-tomaat-shade: #c43f2e;
+  --veg-tomaat-accent: #f28b79;
+  --veg-tomaat-leaf: #5e9e5a;
+
+  --veg-doperwten-body: #8cc152;
+  --veg-doperwten-shade: #6fa03c;
+  --veg-doperwten-accent: #b5db82;
+  --veg-doperwten-leaf: #5e9e5a;
+
+  --veg-bloemkool-body: #f4eedc;
+  --veg-bloemkool-shade: #d9cca8;
+  --veg-bloemkool-accent: #fffaea;
+  --veg-bloemkool-leaf: #7baf6a;
+
+  --veg-sperziebonen-body: #6daa45;
+  --veg-sperziebonen-shade: #538a33;
+  --veg-sperziebonen-accent: #a6d07a;
+  --veg-sperziebonen-leaf: #5e9e5a;
+
+  --veg-prei-body: #eef2dc;
+  --veg-prei-shade: #b9cc8a;
+  --veg-prei-accent: #f9fbf0;
+  --veg-prei-leaf: #4f8a4b;
+
+  --veg-paprika-body: #e2463a;
+  --veg-paprika-shade: #be3429;
+  --veg-paprika-accent: #f28a7e;
+  --veg-paprika-leaf: #4f8a4b;
+
+  --veg-broccoli-body: #4f8f45;
+  --veg-broccoli-shade: #3c7335;
+  --veg-broccoli-accent: #a7ce8c;
+  --veg-broccoli-leaf: #6fa85a;
+
+  --veg-spinazie-body: #3e7b3e;
+  --veg-spinazie-shade: #2f6331;
+  --veg-spinazie-accent: #7db46a;
+  --veg-spinazie-leaf: #5a9a4e;
+
+  --veg-rode-biet-body: #9e2a55;
+  --veg-rode-biet-shade: #7e1e44;
+  --veg-rode-biet-accent: #c85a82;
+  --veg-rode-biet-leaf: #5e9e5a;
+
+  --veg-spruitjes-body: #8dba4e;
+  --veg-spruitjes-shade: #6e9a39;
+  --veg-spruitjes-accent: #b9d987;
+  --veg-spruitjes-leaf: #5e9e5a;
+}

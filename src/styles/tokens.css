@@ -1,0 +1,46 @@
+/*
+ * Design tokens (§14). Eén warme, neutrale basis met één accentkleur.
+ * Groentekleuren staan apart in veggies.css en komen alleen in illustraties voor.
+ */
+@theme {
+  --color-cream: #fbf7f0;
+  --color-paper: #fffdf8;
+  --color-sand: #f3ecdf;
+  --color-line: #e5dac6;
+  --color-ink: #2b2722;
+  --color-ink-soft: #5f574c;
+  --color-accent: #2f6b4f;
+  --color-accent-strong: #245640;
+  --color-accent-soft: #e4eee7;
+  --color-accent-soft-strong: #d4e4d9;
+  --color-accent-on-dark: #cfe6d7;
+  --color-danger: #a4442c;
+  --color-water: #5b9bd5;
+  --color-water-soft: #d6e7f5;
+
+  --color-child-1: #f0b45a;
+  --color-child-2: #8fb6d9;
+  --color-child-3: #e3a0a8;
+  --color-child-4: #a9c79a;
+  --color-child-5: #c3aed8;
+  --color-child-6: #eaa47a;
+
+  --font-heading: 'Nunito', ui-rounded, system-ui, sans-serif;
+  --font-body: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+
+  /* Eén afrondingsmaat en één schaduwniveau voor kaarten. */
+  --radius-card: 1rem;
+  --shadow-card: 0 1px 2px rgb(43 39 34 / 0.05), 0 6px 18px rgb(43 39 34 / 0.06);
+
+  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --tap-min: 48px;
+  --tap-primary: 56px;
+  --motion-fast: 200ms;
+  --motion-base: 260ms;
+  --nav-height: 72px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
