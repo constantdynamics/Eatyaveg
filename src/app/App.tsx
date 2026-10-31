@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ReactNode } from 'react';
+import { lazy, Suspense, useEffect, type ReactNode } from 'react';
 import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router';
 import { useAppStore } from '../store/app-store';
 import { ErrorBoundary } from './ErrorBoundary';
@@ -9,17 +9,38 @@ import { NotFound } from './NotFound';
 import { isDevPanelEnabled } from '../features/dev/dev-flag';
 import { TodayPage } from '../features/today/TodayPage';
 import { LoggingPage } from '../features/logging/LoggingPage';
-import { VeggieDetailPage } from '../features/veggie/VeggieDetailPage';
-import { RecipesPage } from '../features/recipes/RecipesPage';
-import { RecipeDetailPage } from '../features/recipes/RecipeDetailPage';
-import { ShoppingPage } from '../features/shopping/ShoppingPage';
-import { SettingsPage } from '../features/settings/SettingsPage';
-import { HelpPage } from '../features/help/HelpPage';
-import { AboutPage } from '../features/help/AboutPage';
-import { OnboardingPage } from '../features/onboarding/OnboardingPage';
 
-const GardenPage = lazy(() => import('../features/garden/GardenPage'));
-const CookPage = lazy(() => import('../features/cook/CookPage'));
+// Minder gebruikte schermen pas laden als ze nodig zijn (Vandaag en Gegeten blijven direct).
+const load = {
+  veggie: () => import('../features/veggie/VeggieDetailPage'),
+  recipes: () => import('../features/recipes/RecipesPage'),
+  recipe: () => import('../features/recipes/RecipeDetailPage'),
+  shopping: () => import('../features/shopping/ShoppingPage'),
+  settings: () => import('../features/settings/SettingsPage'),
+  help: () => import('../features/help/HelpPage'),
+  about: () => import('../features/help/AboutPage'),
+  onboarding: () => import('../features/onboarding/OnboardingPage'),
+  garden: () => import('../features/garden/GardenPage'),
+  cook: () => import('../features/cook/CookPage'),
+};
+const VeggieDetailPage = lazy(() => load.veggie().then((m) => ({ default: m.VeggieDetailPage })));
+const RecipesPage = lazy(() => load.recipes().then((m) => ({ default: m.RecipesPage })));
+const RecipeDetailPage = lazy(() => load.recipe().then((m) => ({ default: m.RecipeDetailPage })));
+const ShoppingPage = lazy(() => load.shopping().then((m) => ({ default: m.ShoppingPage })));
+const SettingsPage = lazy(() => load.settings().then((m) => ({ default: m.SettingsPage })));
+const HelpPage = lazy(() => load.help().then((m) => ({ default: m.HelpPage })));
+const AboutPage = lazy(() => load.about().then((m) => ({ default: m.AboutPage })));
+const OnboardingPage = lazy(() => load.onboarding().then((m) => ({ default: m.OnboardingPage })));
+
+/** Na het opstarten, als de browser even niets te doen heeft: alvast inladen. */
+function prefetchRoutes() {
+  const run = () => Object.values(load).forEach((fn) => void fn().catch(() => undefined));
+  if ('requestIdleCallback' in window) window.requestIdleCallback(run, { timeout: 4000 });
+  else setTimeout(run, 2500);
+}
+
+const GardenPage = lazy(load.garden);
+const CookPage = lazy(load.cook);
 const DevPanel = lazy(() => import('../features/dev/DevPanel'));
 const CharacterGallery = lazy(() => import('../features/dev/CharacterGallery'));
 
@@ -44,6 +65,7 @@ function OnboardingGuard({ children }: { children: ReactNode }) {
 }
 
 export function App() {
+  useEffect(prefetchRoutes, []);
   return (
     <ErrorBoundary>
       <HashRouter>

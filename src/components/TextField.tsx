@@ -21,7 +21,7 @@ export function TextField({ label, hint, className = '', ...rest }: TextFieldPro
       <input
         id={id}
         aria-describedby={hint ? hintId : undefined}
-        className="min-h-12 w-full rounded-card border border-line bg-paper px-4 text-base text-ink placeholder:text-ink-soft/70 focus-visible:border-accent"
+        className="min-h-12 w-full rounded-card border border-line bg-paper px-4 text-base text-ink placeholder:text-ink-soft focus-visible:border-accent"
         {...rest}
       />
     </div>

@@ -2,7 +2,7 @@
  * Onboarding (§6.6): maximaal 4 schermen, daarna nooit meer.
  * 1 welkom · 2 kind(eren) · 3 welke groenten eet je kind al (optioneel) · 4 zo werkt het.
  */
-import { useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router';
 import { EyeOff, Hand, Sprout, Trash2 } from 'lucide-react';
 import { Button } from '../../components/Button';
@@ -25,6 +25,19 @@ interface Draft {
 }
 
 const sortedVeggies = [...VEGGIES].sort((a, b) => a.name.localeCompare(b.name, 'nl'));
+
+/** De kop van elke stap krijgt de focus, zodat een schermlezer de nieuwe stap voorleest. */
+function StepHeading({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    ref.current?.focus({ preventScroll: false });
+  }, []);
+  return (
+    <h1 ref={ref} tabIndex={-1} className="text-3xl outline-none">
+      {children}
+    </h1>
+  );
+}
 
 function StepDots({ step }: { step: number }) {
   return (
@@ -50,7 +63,7 @@ function Welcome({ onNext }: { onNext: () => void }) {
         <VeggieIcon id="wortel" size={96} />
         <VeggieIcon id="tomaat" size={64} />
       </div>
-      <h1 className="text-3xl">Welkom bij Familie Vriendelijk</h1>
+      <StepHeading>Welkom bij Familie Vriendelijk</StepHeading>
       <p className="mt-3 text-lg text-ink-soft">
         Verstop groenten in familierecepten en tik na het eten aan wat je kind heeft geproefd. In de
         groentetuin ziet je kind de groentevriendjes daarna groeien.
@@ -78,7 +91,7 @@ function ChildrenStep({ drafts, setDrafts, onNext, onBack }: ChildrenStepProps) 
 
   return (
     <>
-      <h1 className="text-3xl">Voor wie is de tuin?</h1>
+      <StepHeading>Voor wie is de tuin?</StepHeading>
       <p className="mt-2 text-ink-soft">
         Een voornaam of bijnaam is genoeg. Meer hoeven we niet te weten.
       </p>
@@ -171,7 +184,7 @@ function KnownStep({ drafts, setDrafts, onNext, onBack }: KnownStepProps) {
 
   return (
     <>
-      <h1 className="text-3xl">Welke groenten eet {draft.name.trim()} al?</h1>
+      <StepHeading key={draft.key}>Welke groenten eet {draft.name.trim()} al?</StepHeading>
       <p className="mt-2 text-ink-soft">
         Die vriendjes staan dan meteen in de tuin. Geen idee? Sla het gerust over.
       </p>
@@ -219,7 +232,7 @@ function HowStep({ onDone, onBack }: { onDone: () => void; onBack: () => void })
   const platform = detectPlatform();
   return (
     <>
-      <h1 className="text-3xl">Zo werkt het</h1>
+      <StepHeading>Zo werkt het</StepHeading>
       <ol className="mt-6 space-y-3">
         {HOW.map(({ icon: Icon, title, text }, i) => (
           <li key={title} className="fv-card flex gap-4 p-5">

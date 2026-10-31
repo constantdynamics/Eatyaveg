@@ -2,7 +2,6 @@
  * Maakt ingeladen of geïmporteerde data veilig bruikbaar. Ongeldige onderdelen worden apart
  * gezet (quarantaine) in plaats van weggegooid: een walvis raak je nooit kwijt.
  */
-import type { z } from 'zod';
 import {
   childSchema,
   eatEventSchema,
@@ -27,7 +26,11 @@ function asRecord(value: unknown): Record<string, unknown> {
     : {};
 }
 
-function keepValid<T>(value: unknown, schema: z.ZodType<T>, rejected: unknown[]): T[] {
+interface Parser<T> {
+  safeParse(value: unknown): { success: true; data: T } | { success: false };
+}
+
+function keepValid<T>(value: unknown, schema: Parser<T>, rejected: unknown[]): T[] {
   if (!Array.isArray(value)) {
     if (value !== undefined) rejected.push(value);
     return [];

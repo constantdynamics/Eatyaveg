@@ -1,5 +1,8 @@
-/** Zod-schema's voor opgeslagen data en import (§11.3). */
-import { z } from 'zod';
+/**
+ * Schema's voor opgeslagen data en import (§11.3). Met `zod/mini`: dezelfde validatie, een
+ * fractie van de bundelgrootte (de contentvalidatie gebruikt de volledige zod, buiten de app).
+ */
+import * as z from 'zod/mini';
 import { ALLERGENS, CHILD_COLORS, SECTIONS, VEGGIE_IDS } from '../domain/types';
 
 export const veggieIdSchema = z.enum(VEGGIE_IDS);
@@ -8,29 +11,31 @@ export const sectionSchema = z.enum(SECTIONS);
 const phaseSchema = z.literal([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 const visibilitySchema = z.literal([1, 2, 3, 4]);
 const variantSchema = z.enum(['verstopt', 'zichtbaar']);
-const isoSchema = z.string().min(10);
+const isoSchema = z.string().check(z.minLength(10));
+const nonEmpty = z.string().check(z.minLength(1));
+const intIn = (min: number, max: number) => z.int().check(z.minimum(min), z.maximum(max));
 
 export const childSchema = z.object({
-  id: z.string().min(1),
-  name: z.string().min(1).max(40),
-  spokenName: z.string().max(60).optional(),
+  id: nonEmpty,
+  name: z.string().check(z.minLength(1), z.maxLength(40)),
+  spokenName: z.optional(z.string().check(z.maxLength(60))),
   color: z.enum(CHILD_COLORS),
   createdAt: isoSchema,
 });
 
 export const eatEventSchema = z.object({
-  id: z.string().min(1),
-  childId: z.string().min(1),
+  id: nonEmpty,
+  childId: nonEmpty,
   veggieId: veggieIdSchema,
   at: isoSchema,
   source: z.enum(['plus', 'raster', 'recept', 'start']),
-  recipeId: z.string().optional(),
-  visibility: visibilitySchema.optional(),
+  recipeId: z.optional(z.string()),
+  visibility: z.optional(visibilitySchema),
 });
 
 export const practiceEventSchema = z.object({
-  id: z.string().min(1),
-  childId: z.string().min(1),
+  id: nonEmpty,
+  childId: nonEmpty,
   veggieId: veggieIdSchema,
   at: isoSchema,
   enabled: z.boolean(),
@@ -38,33 +43,33 @@ export const practiceEventSchema = z.object({
 
 export const settingsSchema = z.object({
   perPhase: z.literal([2, 3]),
-  dailyCap: z.number().int().min(1).max(10),
-  regrowPerPhase: z.number().int().min(1).max(3),
-  shrinkDays: z.number().int().min(1).max(60),
-  maxShrink: z.number().int().min(1).max(8),
+  dailyCap: intIn(1, 10),
+  regrowPerPhase: intIn(1, 3),
+  shrinkDays: intIn(1, 60),
+  maxShrink: intIn(1, 8),
   sound: z.boolean(),
   speech: z.boolean(),
-  voiceURI: z.string().optional(),
+  voiceURI: z.optional(z.string()),
   reveal: z.boolean(),
   enabledVeggies: z.array(veggieIdSchema),
   allergies: z.array(allergenSchema),
-  parentNames: z.array(z.string().max(30)).optional(),
+  parentNames: z.optional(z.array(z.string().check(z.maxLength(30)))),
   favoriteRecipeIds: z.array(z.string()),
 });
 
 export const shoppingSchema = z.object({
   recipes: z.array(
     z.object({
-      recipeId: z.string().min(1),
-      servings: z.number().int().min(1).max(20),
+      recipeId: nonEmpty,
+      servings: intIn(1, 20),
       variant: variantSchema,
       addedAt: isoSchema,
     }),
   ),
   manual: z.array(
     z.object({
-      id: z.string().min(1),
-      name: z.string().min(1).max(80),
+      id: nonEmpty,
+      name: z.string().check(z.minLength(1), z.maxLength(80)),
       section: sectionSchema,
       addedAt: isoSchema,
     }),
@@ -72,60 +77,50 @@ export const shoppingSchema = z.object({
   items: z.record(
     z.string(),
     z.object({
-      bought: z.boolean().optional(),
-      atHome: z.boolean().optional(),
-      hidden: z.boolean().optional(),
+      bought: z.optional(z.boolean()),
+      atHome: z.optional(z.boolean()),
+      hidden: z.optional(z.boolean()),
     }),
   ),
 });
 
 export const snapshotSchema = z.object({
-  childId: z.string().min(1),
+  childId: nonEmpty,
   seenAt: isoSchema,
   veggies: z.partialRecord(
     veggieIdSchema,
     z.object({
       phase: phaseSchema,
-      drops: z.number().int().min(0).max(3),
-      count: z.number().int().min(0).optional(),
+      drops: intIn(0, 3),
+      count: z.optional(z.int().check(z.minimum(0))),
     }),
   ),
 });
 
 export const metaSchema = z.object({
-  schemaVersion: z.number().int().min(1),
+  schemaVersion: z.int().check(z.minimum(1)),
   onboarded: z.boolean(),
   createdAt: isoSchema,
-  selectedChildId: z.string().optional(),
-  daily: z
-    .object({ date: z.string(), recipeId: z.string(), skipped: z.array(z.string()) })
-    .optional(),
-  recentDailyMains: z.array(z.object({ date: z.string(), veggieId: veggieIdSchema })).optional(),
-  cooked: z
-    .object({
+  selectedChildId: z.optional(z.string()),
+  daily: z.optional(
+    z.object({ date: z.string(), recipeId: z.string(), skipped: z.array(z.string()) }),
+  ),
+  recentDailyMains: z.optional(z.array(z.object({ date: z.string(), veggieId: veggieIdSchema }))),
+  cooked: z.optional(
+    z.object({
       date: z.string(),
       recipeId: z.string(),
       variant: variantSchema,
-      servings: z.number().int().min(1).max(20),
-      logged: z.boolean().optional(),
-    })
-    .optional(),
-  persistRequested: z.boolean().optional(),
-});
-
-export const persistedStateSchema = z.object({
-  meta: metaSchema,
-  children: z.array(childSchema),
-  eatEvents: z.array(eatEventSchema),
-  practiceEvents: z.array(practiceEventSchema),
-  settings: settingsSchema,
-  shopping: shoppingSchema,
-  snapshots: z.record(z.string(), snapshotSchema),
+      servings: intIn(1, 20),
+      logged: z.optional(z.boolean()),
+    }),
+  ),
+  persistRequested: z.optional(z.boolean()),
 });
 
 export const exportFileSchema = z.object({
   app: z.literal('familie-vriendelijk'),
-  schemaVersion: z.number().int().min(1),
+  schemaVersion: z.int().check(z.minimum(1)),
   exportedAt: isoSchema,
   data: z.unknown(),
 });

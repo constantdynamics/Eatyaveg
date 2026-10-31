@@ -122,6 +122,8 @@ export function DataSection() {
           type="file"
           accept="application/json,.json"
           className="sr-only"
+          tabIndex={-1}
+          aria-label="Back-upbestand kiezen"
           id="import-file"
           onChange={(e) => void onFile(e.target.files?.[0])}
         />

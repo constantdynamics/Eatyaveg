@@ -198,7 +198,7 @@ export function RecipesPage() {
             value={filters.query ?? ''}
             onChange={(e) => set('q', e.target.value)}
             placeholder="Zoek op recept of groente"
-            className="min-h-12 w-full rounded-card border border-line bg-paper pl-12 pr-4 text-base placeholder:text-ink-soft/80 focus-visible:border-accent"
+            className="min-h-12 w-full rounded-card border border-line bg-paper pl-12 pr-4 text-base placeholder:text-ink-soft focus-visible:border-accent"
           />
         </label>
         <Button

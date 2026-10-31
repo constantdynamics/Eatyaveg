@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { Suspense, useState, type ReactNode } from 'react';
 import { NavLink, Outlet } from 'react-router';
 import { BookOpen, Plus, ShoppingBasket, Sprout, Sun } from 'lucide-react';
 import { nl } from '../i18n/nl';
@@ -109,7 +109,9 @@ export function ParentLayout() {
         className="mx-auto w-full max-w-3xl px-4 pt-[calc(var(--safe-top)+8px)] md:px-8 md:pt-6 lg:max-w-5xl"
         style={{ paddingBottom: 'calc(var(--nav-height) + var(--safe-bottom) + 24px)' }}
       >
-        <Outlet />
+        <Suspense fallback={<div className="min-h-[60dvh]" aria-busy="true" />}>
+          <Outlet />
+        </Suspense>
       </main>
       <SnackbarHost />
     </div>

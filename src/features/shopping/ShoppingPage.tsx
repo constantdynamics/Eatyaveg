@@ -117,7 +117,7 @@ export function ShoppingPage() {
             onChange={(e) => setDraft(e.target.value)}
             maxLength={80}
             placeholder="Zelf iets toevoegen"
-            className="min-h-12 w-full rounded-card border border-line bg-paper px-4 text-base placeholder:text-ink-soft/80 focus-visible:border-accent"
+            className="min-h-12 w-full rounded-card border border-line bg-paper px-4 text-base placeholder:text-ink-soft focus-visible:border-accent"
           />
         </label>
         <Button type="submit" disabled={!draft.trim()} icon={<Plus size={20} aria-hidden="true" />}>
