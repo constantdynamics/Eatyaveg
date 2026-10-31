@@ -18,7 +18,9 @@ export async function onboard(
   }
   await page.getByRole('button', { name: 'Volgende' }).click();
   for (const child of children) {
-    await expect(page.getByRole('heading', { name: `Welke groenten eet ${child.name} al?` })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: `Welke groenten eet ${child.name} al?` }),
+    ).toBeVisible();
     for (const veg of child.known ?? []) {
       await page.getByRole('button', { name: veg, exact: true }).click();
     }

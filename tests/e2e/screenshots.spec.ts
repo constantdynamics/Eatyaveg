@@ -18,7 +18,10 @@ for (const size of [
     await page.setViewportSize({ width: size.width, height: size.height });
     await page.goto('./#/welkom');
     await shot(page, `${size.name}-01-welkom`);
-    await onboard(page, [{ name: 'Noor', known: ['Wortel', 'Tomaat', 'Komkommer'] }, { name: 'Sem' }]);
+    await onboard(page, [
+      { name: 'Noor', known: ['Wortel', 'Tomaat', 'Komkommer'] },
+      { name: 'Sem' },
+    ]);
     await shot(page, `${size.name}-02-vandaag`, true);
     await page.getByRole('button', { name: /Broccoli gegeten of geproefd door Noor/ }).click();
     await shot(page, `${size.name}-03-vandaag-snackbar`);

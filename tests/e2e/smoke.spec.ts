@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { firstChildId, onboard } from './helpers';
 
-test('onboarding → aantikken → tuin → groeimoment → Ouder vasthouden → herladen → bewaard', async ({ page }) => {
+test('onboarding → aantikken → tuin → groeimoment → Ouder vasthouden → herladen → bewaard', async ({
+  page,
+}) => {
   await onboard(page, [{ name: 'Noor', known: ['Wortel'] }], '?dev=1');
   const id = await firstChildId(page);
 
@@ -10,7 +12,9 @@ test('onboarding → aantikken → tuin → groeimoment → Ouder vasthouden →
   // …en de derde via de plusknop: samen 4 = fase 2 (lieveheersbeestje).
   await page.getByRole('button', { name: 'Wortel gegeten of geproefd door Noor' }).click();
   await expect(page.getByRole('status')).toContainText('Wortel aangetikt voor Noor');
-  await expect(page.getByText('Zo groot als een lieveheersbeestje · nog 3× tot egel')).toBeVisible();
+  await expect(
+    page.getByText('Zo groot als een lieveheersbeestje · nog 3× tot egel'),
+  ).toBeVisible();
 
   // Toon aan Noor → de tuin opent en speelt de momenten af.
   await page.getByRole('button', { name: 'Toon aan Noor' }).click();
@@ -37,7 +41,9 @@ test('onboarding → aantikken → tuin → groeimoment → Ouder vasthouden →
 
   // Herladen: alles is bewaard en de momenten worden niet opnieuw afgespeeld.
   await page.reload();
-  await expect(page.getByText('Zo groot als een lieveheersbeestje · nog 3× tot egel')).toBeVisible();
+  await expect(
+    page.getByText('Zo groot als een lieveheersbeestje · nog 3× tot egel'),
+  ).toBeVisible();
   await page.goto(`./?dev=1#/tuin/${id}`);
   await expect(garden).toHaveAttribute('data-playing', 'nee', { timeout: 20_000 });
   await expect(page.locator('.fv-confetti')).toHaveCount(0);
@@ -64,18 +70,29 @@ test('daglimiet en ongedaan maken', async ({ page }) => {
   await expect(page.getByRole('status')).toContainText('telde vandaag al 2 keer mee');
 });
 
-test('Gegeten: meerdere groenten en kinderen, vanuit een recept voorgeselecteerd', async ({ page }) => {
+test('Gegeten: meerdere groenten en kinderen, vanuit een recept voorgeselecteerd', async ({
+  page,
+}) => {
   await onboard(page, [{ name: 'Noor' }, { name: 'Sem' }]);
   await page.goto('./#/gegeten?recept=romige-tomatensoep&zicht=1');
-  await expect(page.getByRole('button', { name: 'Tomaat', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.getByRole('button', { name: 'Paprika', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('button', { name: 'Tomaat', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(page.getByRole('button', { name: 'Paprika', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
   await page.getByRole('button', { name: /Opslaan/ }).click();
   await expect(page.getByRole('button', { name: 'Toon aan Noor' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Toon aan Sem' })).toBeVisible();
 });
 
 test('reduced motion: de tuin werkt zonder confetti', async ({ browser }) => {
-  const context = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1180, height: 820 } });
+  const context = await browser.newContext({
+    reducedMotion: 'reduce',
+    viewport: { width: 1180, height: 820 },
+  });
   const page = await context.newPage();
   await onboard(page, [{ name: 'Noor', known: ['Wortel'] }], '?dev=1');
   const id = await firstChildId(page);
