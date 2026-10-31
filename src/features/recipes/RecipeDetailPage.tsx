@@ -121,8 +121,8 @@ export function RecipeDetailPage() {
           />
           <p className="mt-2 text-sm text-ink-soft">
             {variant === 'verstopt'
-              ? 'Voor kritische eters: alles glad gepureerd.'
-              : 'Voor avontuurlijkere eters: fijn geraspt of gehakt.'}
+              ? 'Voor kritische eters: zo fijn mogelijk, zodat je de groente niet ziet.'
+              : 'Voor avontuurlijkere eters: fijn geraspt of gehakt, met kleine stukjes.'}
           </p>
         </div>
       )}

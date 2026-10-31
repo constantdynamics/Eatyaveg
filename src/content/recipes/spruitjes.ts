@@ -50,11 +50,13 @@ export const spruitjesRecipes = [
   defineRecipe({
     id: 'aardappel-spruitjeskoekjes',
     name: 'Aardappel-spruitjeskoekjes',
-    description: 'Goudbruine koekjes van aardappel, kaas en spruitjes.',
+    description:
+      'Goudbruine koekjes van aardappel, kaas en spruitjes; met een restje puree gaat het sneller.',
     category: 'hoofdgerecht',
     mainVeggie: 'spruitjes',
     visibility: 1,
-    timeMinutes: 30,
+    weekend: true,
+    timeMinutes: 45,
     ingredients: [aardappelen(600), spruitjes(200), ei(1), bloem(40), kaas(75), peper(), olie(3)],
     steps: [
       'Schil de aardappelen en kook ze met de schoongemaakte spruitjes in 15 minuten gaar. Laat goed uitdampen.',

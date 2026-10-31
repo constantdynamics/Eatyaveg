@@ -19,7 +19,14 @@ export function createRepoStorage(repos: Repos, fallback: () => Repos): RepoStor
   let active = repos;
   let status: StorageStatus = 'ok';
   let last: Partial<PersistedState> = {};
-  let queue: Promise<unknown> = Promise.resolve();
+  // Schrijfacties starten meteen (IndexedDB verwerkt ze op volgorde van aanmaken); zo is een tik
+  // vlak voor herladen of afsluiten al onderweg. `pending` is er alleen voor flush().
+  const pending = new Set<Promise<unknown>>();
+  const track = (job: Promise<unknown>) => {
+    pending.add(job);
+    void job.finally(() => pending.delete(job));
+    return job;
+  };
 
   const switchToMemory = (error: unknown) => {
     if (status === 'memory') return;
@@ -77,28 +84,22 @@ export function createRepoStorage(repos: Repos, fallback: () => Repos): RepoStor
       if (s.shopping !== prev.shopping) writes.push(() => r.shopping.save(s.shopping));
       if (s.snapshots !== prev.snapshots) writes.push(() => r.snapshots.save(s.snapshots));
       if (writes.length === 0) return;
-      const job = queue.then(() => Promise.all(writes.map((w) => w()))).catch(switchToMemory);
-      queue = job;
-      await job;
+      await track(Promise.all(writes.map((w) => w())).catch(switchToMemory));
     },
 
     async removeItem() {
       last = {};
       const r = active;
-      const job = queue
-        .then(() =>
-          Promise.all([
-            r.meta.clear(),
-            r.children.clear(),
-            r.events.clear(),
-            r.settings.clear(),
-            r.shopping.clear(),
-            r.snapshots.clear(),
-          ]),
-        )
-        .catch(switchToMemory);
-      queue = job;
-      await job;
+      await track(
+        Promise.all([
+          r.meta.clear(),
+          r.children.clear(),
+          r.events.clear(),
+          r.settings.clear(),
+          r.shopping.clear(),
+          r.snapshots.clear(),
+        ]).catch(switchToMemory),
+      );
     },
   };
 
@@ -106,7 +107,7 @@ export function createRepoStorage(repos: Repos, fallback: () => Repos): RepoStor
     storage,
     status: () => status,
     flush: async () => {
-      await queue;
+      await Promise.all([...pending]);
     },
   };
 }

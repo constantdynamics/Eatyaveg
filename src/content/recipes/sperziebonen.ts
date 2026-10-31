@@ -28,13 +28,13 @@ export const sperziebonenRecipes = [
       sperziebonen(250),
       roomkaas(100),
       parmezaan(30),
-      knoflook(1),
+      knoflook(0.5),
       olie(2),
       peper(),
     ],
     steps: [
       'Kook de penne volgens de verpakking.',
-      'Haal de puntjes van de sperziebonen, snijd ze in stukjes en kook ze in 10 minuten heel zacht.',
+      'Haal de puntjes van de sperziebonen, snijd ze in stukjes en kook ze in 10 minuten heel zacht; kook de knoflook de laatste 2 minuten mee, dan wordt hij milder.',
       {
         verstopt:
           'Pureer de boontjes glad met de roomkaas, de Parmezaanse kaas, de knoflook en de olijfolie.',

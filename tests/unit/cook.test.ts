@@ -13,7 +13,10 @@ describe('kookmodus: ingrediënten per stap', () => {
       'ui',
       'knoflook',
     ]);
-    expect(ingredientsForStep(steps[0]!, ings).map((i) => i.name)).toEqual(['pasta', 'wortel']);
+    expect(ingredientsForStep(steps[0]!, ings).map((i) => i.name)).toEqual(['wortel']);
+    expect(ingredientsForStep(steps[3]!, ings).map((i) => i.name)).toEqual(
+      expect.arrayContaining(['pasta', 'passata', 'gedroogde basilicum']),
+    );
   });
 
   it('geen valse treffers op deelwoorden', () => {

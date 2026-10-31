@@ -32,6 +32,8 @@ export interface PlayerCtx {
   display(id: VeggieId): BuddyDisplay | undefined;
   /** Het lopende moment overslaan (tik). */
   setSkip(controller: AbortController | null): void;
+  /** Onthouden dat de mentor vandaag sprak. */
+  markMentor(): void;
   reducedMotion: boolean;
   childName: string;
   parentNames: readonly string[];
@@ -188,6 +190,7 @@ async function growth(
   plan: VisitPlan,
   m: Extract<Moment, { kind: 'groei' }>,
   signal: AbortSignal,
+  compact = false,
 ) {
   const id = m.veggieId;
   const before = ctx.display(id);
@@ -220,14 +223,16 @@ async function growth(
   ctx.sound('groei');
   if (!ctx.reducedMotion) ctx.confetti();
   ctx.setMode(modeFor(id, { phase: m.to, spot: startSpot }), 700);
-  await ctx.wait(1600, signal);
+  await ctx.wait(compact ? 1200 : 1600, signal);
 
   const to = Math.max(1, m.to) as Exclude<Phase, 0>;
   ctx.patch(id, { pose: 'staan', mood: 'blij', showAnimal: true });
   await ctx.say(lines.growth(buddyName(id), phaseDef(to).animalWithArticle), signal);
   ctx.patch(id, { pose: 'kracht', mood: 'trots' });
-  await ctx.say(lines.power(buddyName(id), powerText(to, ctx.parentNames)), signal);
-  await ctx.wait(700, signal);
+  // Bij een lang bezoek laten we de kracht zien zonder hem ook uit te spreken.
+  if (compact) await ctx.wait(1500, signal);
+  else await ctx.say(lines.power(buddyName(id), powerText(to, ctx.parentNames)), signal);
+  await ctx.wait(compact ? 300 : 700, signal);
   ctx.patch(id, { pose: 'staan', mood: 'blij', showAnimal: false });
 
   // Van de moestuin naar de eigen plek in de tuin.
@@ -244,7 +249,7 @@ async function growth(
     ctx.setMode(modeFor(id, { phase: m.to, spot: 'thuis' }), 2200);
     await ctx.wait(2300, signal);
     ctx.patch(id, { pose: 'zwaaien' });
-    await ctx.wait(800, signal);
+    await ctx.wait(compact ? 300 : 800, signal);
   }
   ctx.dim(null);
   settle(ctx, plan, [id]);
@@ -274,6 +279,7 @@ async function mentor(ctx: PlayerCtx, m: Extract<Moment, { kind: 'mentor' }>, si
   const md = ctx.display(m.mentorId);
   const td = ctx.display(m.targetId);
   if (!md || !td) return;
+  ctx.markMentor();
   ctx.dim(m.mentorId);
   ctx.setMode(modeFor(m.mentorId, md));
   await ctx.wait(1100, signal);
@@ -282,7 +288,9 @@ async function mentor(ctx: PlayerCtx, m: Extract<Moment, { kind: 'mentor' }>, si
   await ctx.say(
     m.reason === 'oefenen'
       ? lines.mentorPractice(target.buddyName, target.spoken)
-      : lines.mentor(target.buddyName, target.spoken),
+      : td.phase === 0
+        ? lines.mentorSeed(target.spoken)
+        : lines.mentor(target.buddyName, target.spoken),
     signal,
   );
   ctx.patch(m.mentorId, { pose: 'staan', mood: 'blij' });
@@ -311,7 +319,13 @@ function idsOf(m: Moment): VeggieId[] {
   }
 }
 
-async function playMoment(ctx: PlayerCtx, plan: VisitPlan, m: Moment, signal: AbortSignal) {
+async function playMoment(
+  ctx: PlayerCtx,
+  plan: VisitPlan,
+  m: Moment,
+  signal: AbortSignal,
+  compact: boolean,
+) {
   switch (m.kind) {
     case 'onthulling':
       return reveal(ctx, m, signal);
@@ -320,7 +334,7 @@ async function playMoment(ctx: PlayerCtx, plan: VisitPlan, m: Moment, signal: Ab
     case 'druppel':
       return drops(ctx, m, signal);
     case 'groei':
-      return growth(ctx, plan, m, signal);
+      return growth(ctx, plan, m, signal, compact);
     case 'fontein':
       return fountain(ctx, plan, m, signal);
     case 'mentor':
@@ -348,14 +362,21 @@ export async function runVisit(ctx: PlayerCtx, plan: VisitPlan): Promise<GardenM
   ctx.patchAll({ pose: 'staan' });
 
   let last: GardenMode = { kind: 'zone', zone: plan.startZone };
+  // Houd het geheel kort (richtlijn hooguit 45 s): na twee groeimomenten of 25 s compacter.
+  const started = performance.now();
+  let growths = 0;
   for (const m of plan.moments) {
     if (ctx.visit.aborted) throw new Skipped();
+    const elapsed = performance.now() - started;
+    if (m.kind === 'mentor' && elapsed > 38_000) continue;
+    if (m.kind === 'groei') growths += 1;
+    const compact = m.kind === 'groei' && (growths > 2 || elapsed > 25_000);
     const controller = new AbortController();
     const onVisitAbort = () => controller.abort();
     ctx.visit.addEventListener('abort', onVisitAbort, { once: true });
     ctx.setSkip(controller);
     try {
-      await playMoment(ctx, plan, m, controller.signal);
+      await playMoment(ctx, plan, m, controller.signal, compact);
     } catch (error) {
       if (ctx.visit.aborted) throw error;
     } finally {

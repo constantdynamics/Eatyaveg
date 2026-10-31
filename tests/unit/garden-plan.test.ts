@@ -84,4 +84,38 @@ describe('bezoekplan', () => {
     expect(plan.silent).toEqual([]);
     expect(plan.initial.wortel).toMatchObject({ phase: 2 });
   });
+
+  it('de mentor spreekt na nieuwe momenten; zonder nieuwe momenten hoogstens één keer per dag', () => {
+    const progress = progressOf({ wortel: 25, broccoli: 1 });
+    const snapshot: GardenSnapshot = {
+      childId: 'k1',
+      seenAt: at(1),
+      veggies: {
+        wortel: toSeen(progress.wortel),
+        broccoli: toSeen(progress.broccoli),
+        prei: toSeen(progress.prei),
+      },
+    };
+    const base = {
+      childId: 'k1',
+      veggieIds: ids,
+      progress,
+      snapshot,
+      events: [],
+      settings,
+      includeMentor: true,
+      playMoments: true,
+      seed: 's',
+    };
+    expect(buildVisitPlan({ ...base, mentorShownToday: false }).moments.map((m) => m.kind)).toEqual(
+      ['mentor'],
+    );
+    expect(buildVisitPlan({ ...base, mentorShownToday: true }).moments).toEqual([]);
+    const more = progressOf({ wortel: 25, broccoli: 2 });
+    expect(
+      buildVisitPlan({ ...base, progress: more, mentorShownToday: true }).moments.map(
+        (m) => m.kind,
+      ),
+    ).toEqual(['druppel', 'mentor']);
+  });
 });

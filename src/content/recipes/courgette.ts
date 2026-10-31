@@ -75,7 +75,7 @@ export const courgetteRecipes = [
         zichtbaar: 'Rasp de courgette met schil en knijp het vocht eruit.',
       },
       'Klop de eieren los met de kookroom, de helft van de kaas, de oregano en wat peper. Meng met de penne en de courgette.',
-      'Schep alles in een ovenschaal, strooi de rest van de kaas erover en bak 15 minuten tot de bovenkant goudbruin is.',
+      'Schep alles in een ondiepe ovenschaal, strooi de rest van de kaas erover en bak 12 minuten tot het ei gestold is en de bovenkant goudbruin.',
     ],
     tips: {
       verstoppen: 'Een laagje gesmolten kaas bovenop houdt de courgette uit het zicht.',

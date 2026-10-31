@@ -14,7 +14,6 @@ import {
   peper,
   roomkaas,
   ui,
-  zout,
 } from './_helpers';
 
 export const broccoliRecipes = [
@@ -54,28 +53,20 @@ export const broccoliRecipes = [
   defineRecipe({
     id: 'broccoli-gehaktballetjes',
     name: 'Gehaktballetjes met verstopte broccoli',
-    description: 'Gewone gehaktballetjes, met een geheim groen randje.',
+    description:
+      'Gewone gehaktballetjes met een geheim groen randje, lekker met aardappeltjes of pasta.',
     category: 'hoofdgerecht',
     mainVeggie: 'broccoli',
     visibility: 1,
     timeMinutes: 30,
-    ingredients: [
-      broccoli(150),
-      gehakt(400),
-      ui(1),
-      ei(1),
-      paneermeel(40),
-      peper(),
-      zout(),
-      olie(2),
-    ],
+    ingredients: [broccoli(150), gehakt(400), ui(1), ei(1), paneermeel(40), peper(), olie(2)],
     steps: [
       {
         verstopt:
           'Maal de broccoli (roosjes en steel) in de keukenmachine tot heel fijne kruimels.',
         zichtbaar: 'Hak de broccoli met een mes heel fijn.',
       },
-      'Snipper de ui heel fijn en meng hem met het gehakt, de broccoli, het ei, het paneermeel, peper en een klein snufje zout.',
+      'Snipper de ui heel fijn en meng hem met het gehakt, de broccoli, het ei, het paneermeel en wat peper.',
       'Draai er met natte handen ongeveer 20 balletjes van.',
       'Bak ze in de olijfolie in 12 tot 15 minuten rondom bruin en gaar.',
     ],
@@ -83,6 +74,8 @@ export const broccoliRecipes = [
       verstoppen: 'In tomatensaus zie je de groene spikkeltjes nauwelijks.',
       weerstand: 'Laat je kind helpen met balletjes draaien.',
       bewaren: 'Rauwe balletjes kun je invriezen.',
+      veiligheid:
+        'Geen zout in het gehakt: dan kan de kinderportie zonder. Zout eventueel aan tafel, alleen bij de volwassenen.',
     },
     allergens: ['ei', 'gluten'],
   }),

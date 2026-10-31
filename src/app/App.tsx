@@ -100,8 +100,8 @@ export function App() {
             </Suspense>
           )}
         </HydrationGate>
+        <UpdatePrompt />
       </HashRouter>
-      <UpdatePrompt />
     </ErrorBoundary>
   );
 }

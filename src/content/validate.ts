@@ -261,6 +261,7 @@ export function validateVeggiesAndLines(): string[] {
     ...lines.fountain(),
     ...lines.mentor('Broccoli', 'broccoli'),
     ...lines.mentorPractice('Broccoli', 'broccoli'),
+    ...lines.mentorSeed('pompoen'),
     ...lines.beforeDinner('Pompoen'),
     ...lines.beforeDinnerSeed('pompoen'),
     ...lines.practice('Broccoli'),

@@ -50,11 +50,11 @@ export const BODIES: Record<VeggieId, BodySpec> = {
       <>
         <path d="M95 18 L105 18 L106 46 L94 46 Z" fill={c.shade} />
         <path
-          d="M100 42 C 80 42 72 56 72 78 C 72 108 62 138 60 166 C 58 200 78 212 100 212 C 122 212 142 200 140 166 C 138 138 128 108 128 78 C 128 56 120 42 100 42 Z"
+          d="M100 44 C 84 44 78 58 78 80 C 78 110 56 136 52 168 C 48 202 76 214 100 214 C 124 214 152 202 148 168 C 144 136 122 110 122 80 C 122 58 116 44 100 44 Z"
           fill={c.body}
         />
         <path
-          d="M120 58 C 128 80 124 112 132 148 C 138 180 130 200 112 208 C 126 196 130 176 126 150 C 120 116 124 84 120 58 Z"
+          d="M116 60 C 122 86 126 112 140 146 C 148 176 140 202 116 210 C 132 198 140 178 134 150 C 126 122 118 90 116 60 Z"
           fill={c.shade}
           opacity={0.5}
         />
@@ -72,16 +72,16 @@ export const BODIES: Record<VeggieId, BodySpec> = {
         />
       </>
     ),
-    face: { x: 100, y: 122, scale: 0.85 },
+    face: { x: 100, y: 130, scale: 0.85 },
     shoulders: [
-      [69, 142],
-      [131, 142],
+      [62, 150],
+      [138, 150],
     ],
     hips: [
-      [90, 208],
-      [110, 208],
+      [88, 210],
+      [112, 210],
     ],
-    headTop: 50,
+    headTop: 52,
     belly: 168,
   },
 
@@ -143,13 +143,12 @@ export const BODIES: Record<VeggieId, BodySpec> = {
           opacity={0.6}
         />
         <g fill={c.shade}>
-          <circle cx={72} cy={62} r={4.5} />
-          <circle cx={72} cy={104} r={4.5} />
-          <circle cx={72} cy={150} r={4.5} />
-          <circle cx={73} cy={190} r={4.5} />
-          <circle cx={128} cy={82} r={4.5} />
-          <circle cx={128} cy={126} r={4.5} />
-          <circle cx={128} cy={170} r={4.5} />
+          {[56, 88, 120, 152, 184].map((y) => (
+            <circle key={`l${y}`} cx={71} cy={y} r={6} />
+          ))}
+          {[72, 104, 136, 168, 200].map((y) => (
+            <circle key={`r${y}`} cx={129} cy={y} r={6} />
+          ))}
         </g>
         <g fill={c.accent} opacity={0.75}>
           <circle cx={86} cy={150} r={2.5} />
@@ -333,11 +332,25 @@ export const BODIES: Record<VeggieId, BodySpec> = {
           fill={c.shade}
           opacity={0.55}
         />
+        <g fill={c.body}>
+          <circle cx={124} cy={130} r={8} />
+          <circle cx={127} cy={160} r={8} />
+          <circle cx={124} cy={190} r={7} />
+          <circle cx={78} cy={144} r={7} />
+          <circle cx={80} cy={176} r={7} />
+        </g>
         <g fill={c.accent} opacity={0.75}>
           <ellipse cx={101} cy={132} rx={5} ry={8} />
           <ellipse cx={103} cy={160} rx={5} ry={8} />
           <ellipse cx={103} cy={188} rx={5} ry={7} />
         </g>
+        <path
+          d="M112 206 C 124 212 130 222 120 228"
+          fill="none"
+          stroke={c.shade}
+          strokeWidth={5}
+          strokeLinecap="round"
+        />
       </>
     ),
     face: { x: 100, y: 80, scale: 0.7 },

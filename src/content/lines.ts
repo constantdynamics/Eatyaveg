@@ -25,7 +25,7 @@ export const lines = {
 
   touchSeed: (): LineList => [
     'Ik ben nog een zaadje!',
-    'Ssst, ik slaap nog even in de grond.',
+    'Ik groei nog even onder de grond.',
     'Wie zou ik worden?',
   ],
 
@@ -75,6 +75,11 @@ export const lines = {
     `${target} is nog klein. Proeven we samen ${spoken}?`,
   ],
 
+  mentorSeed: (spoken: string): LineList => [
+    `Daar zit nog een zaadje. Zullen we ${spoken} eens proeven?`,
+    `Wie zit daar verstopt? Proef ${spoken} maar eens!`,
+  ],
+
   mentorPractice: (target: string, spoken: string): LineList => [
     `${target} wil weer groeien!`,
     `${target} wil weer groeien. Zullen we ${spoken} weer eens proeven?`,
@@ -104,6 +109,8 @@ export function joinNames(names: readonly string[]): string {
 
 /** Woorden die nooit in een zin voor het kind mogen staan (bijlage B, §13.2). */
 export const FORBIDDEN_WORDS = [
+  /\bslaap/i,
+  /\bslapen\b/i,
   /\bmoet\b/i,
   /\bmoeten\b/i,
   /\bgezond/i,

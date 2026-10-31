@@ -18,9 +18,10 @@ GitHub Pages op *GitHub Actions* staat (zie README), publiceert de workflow de a
 
 | Onderdeel | Hoe aangetoond |
 |---|---|
-| Groei, krimp (Weer oefenen), daglimiet, momenten, recept van de dag, porties, boodschappen, migraties, import | 108 unit-tests (Vitest), o.a. met verschoven klok |
-| 56 recepten volgens §9 (10 smoothies, 4 weekend, per groente 2× verstopt + Volgende stap) | `npm run validate:content`: 0 fouten, 0 waarschuwingen; de validator vangt aantoonbaar pittig, ontbrekende allergenen, hele noten, honing zonder tip, te lange tijden, te veel stappen, onvolledige `veggies[]` |
-| Smoke-flow §16: onboarding → aantikken → tuin → groeimoment → Ouder 1,5 s vasthouden → herladen → bewaard | Playwright `tests/e2e/smoke.spec.ts` |
+| Groei, krimp (Weer oefenen), daglimiet, momenten, recept van de dag, porties, boodschappen, migraties, import | 109 unit-tests (Vitest), o.a. met verschoven klok |
+| 56 recepten volgens §9 (10 smoothies, 5 weekend, per groente 2× verstopt + Volgende stap) | `npm run validate:content`: 0 fouten, 0 waarschuwingen; de validator vangt aantoonbaar pittig, ontbrekende allergenen, hele noten, honing zonder tip, te lange tijden, te veel stappen, onvolledige `veggies[]` |
+| Smoke-flow §16: onboarding → aantikken → tuin → groeimoment → Ouder 1,5 s vasthouden → herladen → bewaard | Playwright `tests/e2e/smoke.spec.ts` (12 e2e-tests in totaal, alle groen) |
+| Vertrekken tijdens een moment: het moment blijft bewaard voor het volgende bezoek | Playwright |
 | Deeplinks na herladen, daglimiet en ongedaan maken, Gegeten vanuit een recept, reduced motion | Playwright |
 | Geen netwerkverzoeken buiten de eigen origin; offline na het eerste bezoek; manifest | Playwright `privacy-offline.spec.ts` |
 | Exporteren, dubbel bevestigd wissen, importeren; recept van vandaag vast per dag | Playwright `data.spec.ts` |
@@ -45,7 +46,7 @@ GitHub Pages op *GitHub Actions* staat (zie README), publiceert de workflow de a
 
 ## Verbeteringen en afwijkingen
 
-Alle keuzes staan met reden, alternatief en terugdraai-instructie in `DECISIONS.md` (D1–D22). De
+Alle keuzes staan met reden, alternatief en terugdraai-instructie in `DECISIONS.md` (D1–D23). De
 belangrijkste:
 
 - **Pas ontdekte vriendjes wonen bij het moestuinbed** en wandelen bij hun eerste groei naar hun
@@ -61,7 +62,26 @@ belangrijkste:
 
 ## Onafhankelijke review (§19.3)
 
-_Wordt ingevuld zodra de review klaar is._
+Een aparte reviewer zonder voorkennis heeft de app getoetst aan §16 (met eigen Playwright-scripts,
+een nagemaakte stem en Lighthouse) en 17 recepten nagelopen. Oordeel: de ouder-app, groei, PWA,
+privacy, recepten en kookmodus zijn gehaald; deels gehaald waren de momenten bij vertrekken
+halverwege, reduced motion in de tuin, ongedaan maken na het raster en de rust in portret.
+
+Verwerkt (details in `DECISIONS.md` D23):
+
+- vertrekken tijdens een moment bewaart het moment voor de volgende keer (nieuwe e2e-test);
+- de mentor spreekt na nieuwe momenten, anders hoogstens één keer per dag, met een eigen zin bij
+  een zaadje; geen "slapende" zin meer;
+- lange bezoeken worden compacter (richtlijn 45 s); reduced motion geeft korte cameraovergangen;
+- druppels alleen bij vriendjes in beeld; geen update-melding in de tuin of tijdens het koken;
+- ongedaan maken na opslaan via het raster; opslaan start direct;
+- duidelijker silhouetten voor Courgette, Komkommer en Boontje;
+- recepten: eerlijke tijden, gestoofde appel, mildere knoflook, geen zout in gehaktmengsels,
+  logische pasta-timing, twee paprika's, juiste "licht zichtbaar"-variant, lasagne-tip over ei;
+  en een correcte varianttekst.
+
+Bewust niet overgenomen: de tuin in portret op een telefoon blijft kleiner (landscape-first), omdat
+inzoomen ten koste zou gaan van het altijd vindbaar zijn van elk vriendje.
 
 ## Naamvoorstellen
 
@@ -76,4 +96,45 @@ _Wordt ingevuld zodra de review klaar is._
 
 ## Vragen voor de PO
 
-_Wordt ingevuld na de review._
+1. Mag ik een `main`-branch aanmaken vanaf deze branch, zodat GitHub Pages de app kan publiceren en ik een pull request kan openen?
+
+   a. Ja, maak `main` aan, zet hem als standaardbranch en open een pull request
+
+   b. Ja, maar maak alleen `main` aan; Pages aanzetten doe ik zelf
+
+   c. Nee, ik maak `main` zelf aan en laat het je weten
+
+   d. Publiceer liever eerst een testversie op Netlify
+
+   e. Publiceer liever eerst een testversie op Vercel
+
+   f. Nog niet publiceren; ik wil eerst zelf lokaal kijken
+
+2. Welke naam krijgt de app?
+
+   a. Familie Vriendelijk houden
+
+   b. Proeftuin
+
+   c. Groentetuin
+
+   d. Groeivriendjes
+
+   e. Hapjestuin
+
+   f. Moestuinmaatjes
+
+   g. Een eigen naam, die ik doorgeef
+
+3. Wie legt de voedingstips nog één keer naast de actuele adviezen van het Voedingscentrum (die site was vanuit de bouwomgeving niet bereikbaar)?
+
+   a. Ik doe dat zelf en geef wijzigingen door
+
+   b. Een diëtist of jeugdverpleegkundige uit ons netwerk
+
+   c. Jij, in een volgende sessie waarin voedingscentrum.nl wel bereikbaar is
+
+   d. Niet nodig, de huidige formulering is goed genoeg
+
+   e. Eerst alleen de veiligheidstips (verslikken, honing, zout) laten checken
+

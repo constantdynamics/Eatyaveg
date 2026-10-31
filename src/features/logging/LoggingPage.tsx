@@ -19,6 +19,7 @@ import type { RegisterResult } from '../../store/app-store';
 import type { Child, VeggieId, Visibility } from '../../domain/types';
 import { nl } from '../../i18n/nl';
 import { useAppStore } from '../../store/app-store';
+import { useUiStore } from '../../store/ui-store';
 import { useEnabledVeggies } from '../../store/selectors';
 
 interface SavedState {
@@ -29,6 +30,8 @@ interface SavedState {
 function SavedDialog({ saved, onClose }: { saved: SavedState | undefined; onClose: () => void }) {
   const openGarden = useOpenGarden();
   const dailyCap = useAppStore((s) => s.settings.dailyCap);
+  const removeEvents = useAppStore((s) => s.removeEvents);
+  const showSnackbar = useUiStore((s) => s.showSnackbar);
   if (!saved)
     return (
       <Dialog open={false} onClose={onClose} title="">
@@ -78,6 +81,19 @@ function SavedDialog({ saved, onClose }: { saved: SavedState | undefined; onClos
         <LinkButton to="/" variant="ghost" block onClick={onClose}>
           Terug naar Vandaag
         </LinkButton>
+        {result.added.length > 0 && (
+          <Button
+            variant="ghost"
+            block
+            onClick={() => {
+              removeEvents(result.added.map((e) => e.id));
+              onClose();
+              showSnackbar({ text: 'Niet opgeslagen. Er is niets veranderd.' });
+            }}
+          >
+            {nl.common.undo}
+          </Button>
+        )}
       </div>
     </Dialog>
   );

@@ -67,7 +67,7 @@ export const paprikaRecipes = [
     mainVeggie: 'paprika',
     visibility: 1,
     timeMinutes: 20,
-    ingredients: [paprika(1), olie(1, { variant: 'verstopt' }), roomkaas(50), wraps(8), kaas(150)],
+    ingredients: [paprika(2), olie(1, { variant: 'verstopt' }), roomkaas(75), wraps(8), kaas(150)],
     steps: [
       {
         verstopt:

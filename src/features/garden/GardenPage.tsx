@@ -56,6 +56,23 @@ const OBJECT_SOUND: Record<ObjectId, SoundName> = {
 };
 
 const NO_NAMES: readonly string[] = [];
+
+/** Wanneer sprak de mentor voor het laatst (per kind, alleen op dit apparaat)? */
+function readMentorDay(childId: string): string | null {
+  try {
+    return localStorage.getItem(`fv:mentor:${childId}`);
+  } catch {
+    return null;
+  }
+}
+
+function writeMentorDay(childId: string, day: string) {
+  try {
+    localStorage.setItem(`fv:mentor:${childId}`, day);
+  } catch {
+    // geen opslag: dan spreekt de mentor wat vaker
+  }
+}
 const lastLine = new Map<string, string>();
 
 /** Kies een variant, niet twee keer achter elkaar dezelfde. */
@@ -127,6 +144,7 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
         events: s.eatEvents,
         settings: s.settings,
         includeMentor: true,
+        mentorShownToday: readMentorDay(child.id) === dayKey(clock.now()),
         playMoments: !focus,
         seed: `${child.id}:${dayKey(clock.now())}`,
       }),
@@ -137,6 +155,7 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
   const displays = useRef<Partial<Record<VeggieId, BuddyDisplay>>>({ ...plan.visit.initial });
   const fxCounter = useRef(1);
   const skip = useRef<AbortController | null>(null);
+  const visitRef = useRef<AbortController | null>(null);
   const playing = useRef(true);
   const timers = useRef<number[]>([]);
   const cameraRef = useRef<{ cam: Camera; vp: Viewport }>({ cam: { x: 0, y: 0, scale: 1 }, vp });
@@ -181,6 +200,7 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
   // Het bezoek: groeten, momenten (of de close-up bij "Kijk wie er op je wacht").
   useEffect(() => {
     const visit = new AbortController();
+    visitRef.current = visit;
     const ctx: PlayerCtx = {
       visit: visit.signal,
       setMode: (mode, ms) => dispatch({ type: 'mode', mode, ms }),
@@ -211,6 +231,7 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
       setSkip: (c) => {
         skip.current = c;
       },
+      markMentor: () => writeMentorDay(child.id, dayKey(clock.now())),
       reducedMotion: reduced,
       childName: child.spokenName || child.name,
       parentNames,
@@ -267,7 +288,9 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
   }, [reduced]);
 
   const exit = () => {
-    skip.current?.abort();
+    // Eerst het hele bezoek stoppen: een moment dat niet af is, blijft dan bewaard voor de
+    // volgende keer (en wordt niet als gezien opgeslagen).
+    visitRef.current?.abort();
     cancelSpeech();
     exitFullscreen();
     const idx = (window.history.state as { idx?: number } | null)?.idx ?? 0;
@@ -434,11 +457,14 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
   };
 
   const overview = state.mode.kind === 'overzicht';
+  // Bij prefers-reduced-motion korte overgangen (§8.4).
+  const camMs = reduced ? Math.min(state.camMs, 250) : state.camMs;
+  const currentZone = state.mode.kind === 'overzicht' ? -1 : state.mode.zone;
   const hitMin = 88 / camera.scale;
   const minSize = overview ? 30 / camera.scale : 0;
   const parallax = (f: number) => ({
     transform: `translate3d(${(camera.x - WORLD.width / 2) * (1 - f)}px, 0, 0)`,
-    transitionDuration: `${state.camMs}ms`,
+    transitionDuration: `${camMs}ms`,
   });
   const closeupId = state.mode.kind === 'closeup' ? state.mode.id : undefined;
 
@@ -458,8 +484,8 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
     >
       <div
         ref={worldRef}
-        className={`fv-world ${state.camMs > 0 ? 'fv-world--animate' : ''}`}
-        style={{ transform: worldTransform(camera, vp), transitionDuration: `${state.camMs}ms` }}
+        className={`fv-world ${camMs > 0 ? 'fv-world--animate' : ''}`}
+        style={{ transform: worldTransform(camera, vp), transitionDuration: `${camMs}ms` }}
       >
         <SkyLayer />
         <div className="fv-parallax absolute left-0 top-0" style={parallax(0.4)}>
@@ -498,7 +524,7 @@ function Garden({ child, focus }: { child: Child; focus?: VeggieId }) {
               y={pl.y}
               size={Math.max(pl.size, minSize)}
               display={d}
-              showDrops={!overview}
+              showDrops={!overview && zoneIndexAt(pl.x) === currentZone}
               showAnimal={d.showAnimal || closeupId === id}
               focus={focusHere}
               hitMin={hitMin}

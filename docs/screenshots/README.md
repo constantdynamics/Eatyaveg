@@ -7,7 +7,7 @@ Ouder-app op 390×844 (telefoon) en 820×1180 (tablet); tuin op 1180×820, 820×
 |---|---|
 | ![Welkom](ouder-01-welkom.jpg) | ![Overzicht](tuin-01-overzicht.jpg) |
 | ![Vandaag](ouder-02-vandaag.jpg) | ![Speeltuin](tuin-02-speeltuin.jpg) |
-| ![Gegeten](ouder-03-gegeten.jpg) | ![Bloementuin](tuin-03-bloementuin.jpg) |
+| ![Gegeten](ouder-03-gegeten.jpg) | ![Moestuin](tuin-03-moestuin.jpg) |
 | ![Toon aan](ouder-04-toon-aan.jpg) | ![Close-up met walvis](tuin-04-closeup-walvis.jpg) |
 | ![Groente](ouder-05-groente-detail.jpg) | ![Groeimoment](tuin-05-groeimoment.jpg) |
 | ![Recept](ouder-06-recept.jpg) | ![Portret](tuin-06-portret.jpg) |

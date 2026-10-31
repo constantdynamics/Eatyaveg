@@ -49,6 +49,48 @@ test('onboarding → aantikken → tuin → groeimoment → Ouder vasthouden →
   await expect(page.locator('.fv-confetti')).toHaveCount(0);
 });
 
+test('vertrekken tijdens een moment: het moment blijft bewaard voor het volgende bezoek', async ({
+  page,
+}) => {
+  await onboard(page, [{ name: 'Noor' }], '?dev=1');
+  const id = await firstChildId(page);
+  // Broccoli voor het eerst geproefd: een ontdekmoment staat klaar.
+  await page.getByRole('button', { name: 'Broccoli gegeten of geproefd door Noor' }).click();
+  await page.goto(`./?dev=1#/tuin/${id}`);
+  const garden = page.locator('.fv-garden');
+  await expect(garden).toHaveAttribute('data-playing', 'ja');
+  await page.waitForTimeout(2500);
+  // De ouder houdt de Ouder-knop vast terwijl het moment nog loopt.
+  const box = (await page.getByTestId('ouder-knop').boundingBox())!;
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.waitForTimeout(1700);
+  await page.mouse.up();
+  await expect(page.getByRole('heading', { name: 'Vandaag', exact: true })).toBeVisible();
+  const seen = await page.evaluate(
+    (cid) =>
+      new Promise<unknown>((resolve) => {
+        const req = indexedDB.open('familie-vriendelijk');
+        req.onsuccess = () => {
+          const get = req.result.transaction('kv').objectStore('kv').get('fv:v1:snapshots');
+          get.onsuccess = () => {
+            const snaps = (get.result ?? {}) as Record<
+              string,
+              { veggies: Record<string, unknown> }
+            >;
+            resolve(snaps[cid]?.veggies?.broccoli ?? null);
+          };
+        };
+      }),
+    id,
+  );
+  expect(seen).toBeNull();
+  // Volgend bezoek: het ontdekmoment wordt alsnog afgespeeld.
+  await page.goto(`./?dev=1#/tuin/${id}`);
+  await expect(garden).toHaveAttribute('data-playing', 'ja');
+  await expect(garden).toHaveAttribute('data-mode', 'regio', { timeout: 15_000 });
+});
+
 test('deeplinks werken na herladen', async ({ page }) => {
   await onboard(page, [{ name: 'Sem' }]);
   await page.goto('./#/recepten/wortel-tomatensaus');

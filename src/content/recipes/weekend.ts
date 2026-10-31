@@ -21,14 +21,13 @@ import {
   tomatenblokjes,
   ui,
   wortel,
-  zout,
 } from './_helpers';
 
 export const weekendRecipes = [
   defineRecipe({
     id: 'groentelasagne',
     name: 'Groentelasagne',
-    description: 'Lasagne met drie verstopte groenten in de saus.',
+    description: 'Lasagne waarin wortel, courgette en spinazie wegvallen in de tomatensaus.',
     category: 'hoofdgerecht',
     mainVeggie: 'courgette',
     veggies: ['courgette', 'wortel', 'spinazie', 'tomaat'],
@@ -61,10 +60,11 @@ export const weekendRecipes = [
       'Bak de lasagne in 40 minuten gaar en goudbruin. Laat hem 5 minuten rusten voor je hem aansnijdt.',
     ],
     tips: {
-      verstoppen: 'Drie groenten in één saus, en niemand die het ziet.',
+      verstoppen: 'Wortel, courgette en spinazie in één saus, en niemand die het ziet.',
       weerstand: 'Laat je kind helpen met de laagjes leggen.',
       bewaren: 'Lasagne kan in porties 3 maanden in de vriezer.',
-      veiligheid: 'Koel restjes snel af en bewaar ze in de koelkast.',
+      veiligheid:
+        'Lasagnebladen bevatten soms ei: kijk op het etiket bij een ei-allergie. Koel restjes snel af en bewaar ze in de koelkast.',
     },
     allergens: ['gluten', 'melk'],
   }),
@@ -87,7 +87,6 @@ export const weekendRecipes = [
       paneermeel(60),
       oregano(1),
       peper(),
-      zout(),
     ],
     steps: [
       'Verwarm de oven voor op 180 °C. Snipper de ui heel fijn.',
@@ -96,13 +95,15 @@ export const weekendRecipes = [
           'Rasp de wortel en de geschilde courgette op de fijnste kant en knijp het vocht eruit.',
         zichtbaar: 'Rasp de wortel en de courgette grof en knijp het vocht eruit.',
       },
-      'Meng het gehakt met de groente, de ui, het ei, het paneermeel, de oregano, peper en een klein snufje zout. Vorm er een brood van in een ovenschaal.',
+      'Meng het gehakt met de groente, de ui, het ei, het paneermeel, de oregano en wat peper. Vorm er een brood van in een ovenschaal.',
       'Bak het gehaktbrood in 50 tot 60 minuten gaar. Laat het 5 minuten rusten en snijd het in plakken.',
     ],
     tips: {
       verstoppen: 'In plakken gesneden zie je de groente nauwelijks.',
       weerstand: 'Plakken gehaktbrood zijn de volgende dag ook lekker op brood.',
       bewaren: 'Restjes 2 dagen in de koelkast; plakken kun je invriezen.',
+      veiligheid:
+        'Geen zout in het gehakt: dan kan de kinderportie zonder. Zout eventueel aan tafel, alleen bij de volwassenen.',
     },
     allergens: ['ei', 'gluten'],
   }),

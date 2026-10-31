@@ -42,16 +42,15 @@ export const wortelRecipes = [
     ],
     steps: [
       {
-        verstopt:
-          'Schil de wortel, snijd hem in plakjes en kook hem in 12 minuten zacht. Kook ondertussen de pasta volgens de verpakking.',
-        zichtbaar: 'Schil de wortel en rasp hem fijn. Kook de pasta volgens de verpakking.',
+        verstopt: 'Schil de wortel, snijd hem in plakjes en kook hem in 12 minuten zacht.',
+        zichtbaar: 'Schil de wortel en rasp hem fijn.',
       },
       'Snipper de ui en de knoflook en bak ze in de olijfolie in 3 minuten zacht.',
       {
         verstopt: 'Pureer de wortel met een scheutje kookvocht en roer hem door de ui.',
         zichtbaar: 'Bak de geraspte wortel ongeveer 5 minuten mee tot hij zacht is.',
       },
-      `Voeg de passata en de basilicum toe en laat 10 minuten zachtjes pruttelen. Meng met de pasta. ${ZOUT_STAP}`,
+      `Voeg de passata en de basilicum toe en laat 10 minuten zachtjes pruttelen. Kook ondertussen de pasta en meng hem met de saus. ${ZOUT_STAP}`,
     ],
     tips: {
       verstoppen:
@@ -65,7 +64,8 @@ export const wortelRecipes = [
   defineRecipe({
     id: 'wortel-gehaktballetjes',
     name: 'Wortel-gehaktballetjes',
-    description: 'Sappige balletjes van half gehakt, half wortel.',
+    description:
+      'Sappige balletjes van half gehakt, half wortel; lekker met aardappeltjes of in tomatensaus.',
     category: 'hoofdgerecht',
     mainVeggie: 'wortel',
     visibility: 1,
@@ -78,7 +78,6 @@ export const wortelRecipes = [
       paneermeel(50),
       oregano(1),
       peper(),
-      zout(),
       olie(2),
     ],
     steps: [
@@ -88,7 +87,7 @@ export const wortelRecipes = [
         zichtbaar:
           'Schil de wortel, rasp hem grof en knijp het vocht eruit in een schone theedoek.',
       },
-      'Snipper de ui heel fijn. Meng het gehakt met de wortel, de ui, het ei, het paneermeel, de oregano, peper en een klein snufje zout.',
+      'Snipper de ui heel fijn. Meng het gehakt met de wortel, de ui, het ei, het paneermeel, de oregano en wat peper.',
       'Draai er met natte handen ongeveer 20 balletjes van.',
       'Bak de balletjes in de olijfolie in 12 tot 15 minuten rondom bruin en gaar. Ze zijn gaar als ze vanbinnen niet meer roze zijn.',
     ],
@@ -98,6 +97,8 @@ export const wortelRecipes = [
       weerstand:
         'Maak een paar mini-balletjes voor kleine handjes; prikken met een vorkje is extra leuk.',
       bewaren: 'Rauwe balletjes kun je invriezen. Laat ze in de koelkast ontdooien en bak ze dan.',
+      veiligheid:
+        'Geen zout in het gehakt: dan kan de kinderportie zonder. Zout eventueel aan tafel, alleen bij de volwassenen.',
     },
     allergens: ['ei', 'gluten'],
   }),
@@ -112,9 +113,9 @@ export const wortelRecipes = [
     timeMinutes: 30,
     ingredients: [wortel(500), olie(1), paprikapoeder(0.5), griekseYoghurt(150), bieslook(1)],
     steps: [
-      'Verwarm de oven voor op 200 °C. Schil de wortels en snijd ze in frietjes van een halve centimeter dik.',
-      'Hussel de frietjes met de olijfolie en het paprikapoeder en verdeel ze over een bakplaat met bakpapier.',
-      'Bak ze in 20 tot 25 minuten zacht en goudbruin; keer ze halverwege.',
+      'Verwarm de oven voor op 220 °C en breng water aan de kook. Schil de wortels en snijd ze in frietjes van een halve centimeter dik.',
+      'Kook de frietjes 4 minuten voor, laat ze goed uitlekken en hussel ze met de olijfolie en het paprikapoeder.',
+      'Bak ze op een bakplaat met bakpapier in 15 minuten zacht en goudbruin; keer ze halverwege.',
       'Roer de bieslook door de yoghurt voor de dip.',
     ],
     tips: {

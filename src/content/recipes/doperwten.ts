@@ -58,12 +58,12 @@ export const doperwtenRecipes = [
       doperwten(300),
       parmezaan(40),
       olie(3),
-      knoflook(1),
+      knoflook(0.5),
       ing('verse basilicum', 15, 'g', 'kruiden', { note: 'een klein bosje' }),
       peper(),
     ],
     steps: [
-      'Kook de spaghetti volgens de verpakking. Kook de doperwten 3 minuten in een apart pannetje.',
+      'Kook de spaghetti volgens de verpakking. Kook de doperwten met de knoflook 3 minuten in een apart pannetje.',
       {
         verstopt:
           'Pureer de erwten met de knoflook, de Parmezaanse kaas, de olijfolie en de basilicum tot een gladde pesto.',

@@ -170,3 +170,34 @@ Per beslissing: wat, waarom, welk alternatief, en hoe terug te draaien.
 - **Wat:** zelf toegevoegde items krijgen afdeling "Overig" in plaats van een afdelingskeuze.
 - **Waarom:** één invoerveld is rustiger; de lijst blijft overzichtelijk.
 - **Terugdraaien:** `addManualItem(name, section)` ondersteunt al een afdeling.
+
+## D23 — Verwerking van de onafhankelijke review (§19.3)
+
+Een aparte reviewer zonder voorkennis toetste de app aan §16 en een steekproef van 17 recepten.
+Verwerkt:
+
+- **Vertrek tijdens een moment**: de Ouder-knop breekt nu het hele bezoek af; een moment dat niet
+  af is, wordt niet als gezien opgeslagen en speelt het volgende bezoek alsnog (met e2e-test).
+- **Mentor**: spreekt na nieuwe momenten, en zonder nieuwe momenten hoogstens één keer per dag
+  (per kind, bijgehouden op het apparaat). Bij een zaadje een eigen zin ("Daar zit nog een
+  zaadje…"). De zin met "slapen" is vervangen; `validate:content` weert dat woord nu.
+- **Kortere bezoeken**: vanaf het derde groeimoment, of na 25 seconden, wordt de kracht getoond
+  zonder hem uit te spreken; na 38 seconden vervalt de mentor (richtlijn 45 s).
+- **Reduced motion**: cameraovergangen in de tuin duren dan hoogstens 250 ms.
+- **Druppels** worden alleen getoond bij vriendjes in de zone die in beeld is.
+- **Update-melding** verschijnt niet in de tuin en niet tijdens het koken.
+- **Ongedaan maken** ook na opslaan via het raster.
+- **Opslaan** start direct (niet meer achter elkaar wachtend), zodat een tik vlak voor herladen
+  bewaard blijft.
+- **Silhouetten**: Courgette (knots), Komkommer (knobbels) en Boontje (peulbulten) zijn ook zonder
+  kleur duidelijker van elkaar te onderscheiden.
+- **Recepten**: eerlijke tijden (aardappel-spruitjeskoekjes 45 min, weekend; ovenschotel 12 min
+  bakken; wortelfrietjes eerst voorkoken; stamppotten met waterkoker; gehaktschotel met grill als
+  optie), appel in de bietenstamppot meegestoofd, minder en meegekookte knoflook in pesto's en
+  sauzen, geen zout meer in gehaktmengsels (kinderportie zonder zout), pasta pas koken als de saus
+  pruttelt, twee paprika's in de quesadilla's, "licht zichtbaar" in de pompoensaus met kleine
+  stukjes, lasagnetekst en een ei-tip bij lasagnebladen.
+- **Varianttekst** bij recepten: "zo fijn mogelijk" in plaats van "alles glad gepureerd".
+
+Niet overgenomen, met reden: de tuin in portret op een telefoon blijft kleiner (landscape-first,
+§8.1); alle zones blijven volledig in beeld, zodat geen vriendje onvindbaar wordt.

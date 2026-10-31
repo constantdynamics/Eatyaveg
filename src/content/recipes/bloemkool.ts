@@ -69,7 +69,7 @@ export const bloemkoolRecipes = [
       peper(),
     ],
     steps: [
-      'Schil de aardappelen en kook ze met de bloemkoolroosjes in 15 minuten gaar. Verwarm de oven voor op 220 °C.',
+      'Breng water aan de kook (een waterkoker gaat het snelst). Schil de aardappelen, snijd ze klein en kook ze met de bloemkoolroosjes in 15 minuten gaar.',
       'Snipper de ui en bak hem met het gehakt rul. Voeg de tomatenblokjes toe en laat 5 minuten pruttelen.',
       {
         verstopt:
@@ -77,7 +77,7 @@ export const bloemkoolRecipes = [
         zichtbaar:
           'Stamp de aardappelen en bloemkool grof met de melk en de boter. Breng op smaak met nootmuskaat en peper.',
       },
-      'Schep het gehakt in een ovenschaal, verdeel de puree erover en zet de schotel 8 minuten in de oven.',
+      'Schep het gehakt in een schaal en verdeel de puree erover. Wie tijd heeft, zet de schaal nog 8 minuten onder de grill voor een goudbruin korstje.',
     ],
     tips: {
       verstoppen: 'In de puree is bloemkool niet te onderscheiden van aardappel.',

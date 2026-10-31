@@ -32,6 +32,8 @@ export interface PlanInput {
   events: readonly EatEvent[];
   settings: Pick<Settings, 'reveal' | 'perPhase' | 'regrowPerPhase'>;
   includeMentor: boolean;
+  /** Was de mentor vandaag al te horen? Dan alleen nog na nieuwe momenten. */
+  mentorShownToday?: boolean;
   /** Bij "Kijk wie er op je wacht" spelen we geen momenten af. */
   playMoments: boolean;
   seed: string;
@@ -103,6 +105,8 @@ export function buildVisitPlan(input: PlanInput): VisitPlan {
         seed: input.seed,
       })
     : [];
+  // De mentor spreekt na de andere momenten; zonder nieuwe momenten hoogstens één keer per dag.
+  if (input.mentorShownToday && moments.every((m) => m.kind === 'mentor')) moments.length = 0;
   const involved = veggiesInMoments(moments);
 
   const initial: VisitPlan['initial'] = {};

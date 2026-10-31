@@ -1,7 +1,12 @@
+import { useLocation } from 'react-router';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
-/** Rustige melding als er een nieuwe versie klaarstaat. */
+/**
+ * Rustige melding als er een nieuwe versie klaarstaat. Niet in de tuin (geen interface voor het
+ * kind, §14.2) en niet tijdens het koken; daar verschijnt hij zodra je terug bent.
+ */
 export function UpdatePrompt() {
+  const { pathname } = useLocation();
   const {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
@@ -11,7 +16,7 @@ export function UpdatePrompt() {
     },
   });
 
-  if (!needRefresh) return null;
+  if (!needRefresh || pathname.startsWith('/tuin/') || pathname.endsWith('/koken')) return null;
   return (
     <div
       role="status"

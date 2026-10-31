@@ -43,7 +43,7 @@ export const pompoenRecipes = [
       {
         verstopt: 'Pureer alles glad met de roomkaas.',
         zichtbaar:
-          'Haal een paar lepels blokjes eruit en pureer de rest met de roomkaas. Roer de blokjes er weer door.',
+          'Pureer alles maar kort met de roomkaas, zodat er kleine stukjes pompoen in blijven.',
       },
       `Breng op smaak met nootmuskaat en meng met de pasta. ${ZOUT_STAP}`,
     ],
