@@ -53,3 +53,73 @@ Per beslissing: wat, waarom, welk alternatief, en hoe terug te draaien.
   push naar `main`.
 - **Waarom:** fouten zie je vóór het mergen.
 - **Terugdraaien:** `pull_request` uit `on:` halen.
+
+## D8 — Pas ontdekte vriendjes wonen bij het moestuinbed
+
+- **Wat:** fase 0 is een zaadje in het bed, fase 1 staat bij zijn eigen plekje in het bed, vanaf
+  fase 2 woont een vriendje vast in een van de andere zones. Bij de groei van 1 naar 2 wandelt het
+  vriendje (in beeld) naar zijn eigen plek.
+- **Waarom:** volgt §8.2 letterlijk ("een bed met de zaadjes en pas ontdekte vriendjes"); mier-
+  kleine vriendjes zijn zo makkelijk te vinden; de verhuizing is een feestelijk extra moment.
+- **Alternatief:** vanaf de ontdekking meteen in de eigen zone.
+- **Terugdraaien:** `spotForPhase` in `src/features/garden/world.ts`.
+
+## D9 — Groottes in de tuin
+
+- **Wat:** fase 1 tot 9 lopen van 44 tot 431 wereld-eenheden (factor 1,33 per fase). In de
+  zoneweergave is dat ongeveer 45 px tot ruim de helft van een liggende tablet; de close-up toont
+  elk vriendje op ongeveer 55% van de schermhoogte. Zones worden verticaal ingekaderd op hun
+  inhoud, zodat er weinig lege lucht is.
+- **Waarom:** 70% schermhoogte in de zoneweergave liet geen ruimte voor meerdere grote vriendjes.
+- **Terugdraaien:** `PHASE_BASE` en `PHASE_GROWTH` in `world.ts`, `zoneCamera` in `camera.ts`.
+
+## D10 — Eén groot icoon om uit te zoomen
+
+- **Wat:** naast de Ouder-knop staat in de zone- en close-upweergave één rustig kaart-icoon om naar
+  het overzicht te gaan (en knijpen werkt ook).
+- **Waarom:** §8.3 vraagt om "uitzoomen met een groot icoon"; §14.2 wil verder geen interface. Het
+  icoon is tekstloos, half doorzichtig en verdwijnt in het overzicht en tijdens momenten.
+- **Terugdraaien:** de `fv-zoomout`-knop in `GardenPage.tsx`.
+
+## D11 — "Kijk wie er op je wacht" speelt geen momenten af
+
+- **Wat:** via `?focus=` gaat de tuin direct in close-up bij die groente; eventuele nieuwe momenten
+  blijven bewaard voor het volgende bezoek (na het eten, via Toon aan).
+- **Waarom:** vóór het eten gaat het om motiveren; het vieren hoort na het eten.
+- **Terugdraaien:** `playMoments: !focus` in `GardenPage.tsx`.
+
+## D12 — Snapshot per moment bijwerken
+
+- **Wat:** elk moment markeert zijn groenten als gezien zodra het is afgespeeld (of overgeslagen).
+- **Waarom:** verlaat de ouder de tuin halverwege, dan wordt niets dubbel en niets nooit getoond
+  ("precies één keer").
+- **Terugdraaien:** `settle`/`markSeen` in `src/features/garden/player.ts`.
+
+## D13 — De mentor spreekt elk bezoek hoogstens één keer
+
+- **Wat:** als er een walvis is, nodigt hij aan het eind van de momenten één keer uit, ook als er
+  geen nieuwe momenten waren. Bij Weer oefenen kiest hij die groente.
+- **Terugdraaien:** `includeMentor` in `GardenPage.tsx`.
+
+## D14 — Stemmen via internet alleen op uitdrukkelijke keuze
+
+- **Wat:** de app gebruikt automatisch alleen een Nederlandse stem die op het apparaat zelf werkt.
+  Een stem via internet (bijvoorbeeld in desktop-Chrome) wordt alleen gebruikt als de ouder hem in
+  Instellingen kiest; daar staat uitgelegd dat de tekst (ook de naam) dan naar de browsermaker gaat.
+- **Waarom:** privacy by design (§2.7) en §8.5.
+- **Terugdraaien:** `pickVoice` in `src/audio/voice.ts`.
+
+## D15 — Geen blokkade van de terugknop van het systeem
+
+- **Wat:** in de tuin wordt de terugknop van Android of de browser niet onderschept.
+- **Waarom:** onderscheppen met extra geschiedenisregels botst met de router en verwart ouders
+  later. De hulp-pagina legt Begeleide toegang (iPad) en App vastzetten (Android) uit; dat is
+  betrouwbaarder.
+- **Terugdraaien:** n.v.t. (toevoegen kan met een `popstate`-wacht in `GardenPage.tsx`).
+
+## D16 — Geluidjes zelf gemaakt, zonder bestanden
+
+- **Wat:** alle geluidjes zijn korte Web Audio-synthese (plop, pling, groeideuntje, kwaak, giechel,
+  druppel, fontein, woesj, tik), zacht afgesteld (masterniveau 0,45).
+- **Waarom:** geen licenties of downloads nodig, klein, en altijd offline.
+- **Terugdraaien:** `src/audio/sounds.ts`.

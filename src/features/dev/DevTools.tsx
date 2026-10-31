@@ -1,10 +1,41 @@
 import { useState } from 'react';
 import { VEGGIES } from '../../content/veggies';
+import { lines } from '../../content/lines';
+import { PHASES } from '../../content/phases';
+import { playSound, speak, unlockAudio, type SoundName } from '../../audio';
 import type { Phase, VeggieId } from '../../domain/types';
 import { useAppStore } from '../../store/app-store';
 import { devAddEvents, devGardenShowcase, devReplayMoments, devSetPhase } from './dev-actions';
 
 const btn = 'rounded-card border border-line px-3 py-2';
+
+const SAMPLE_LINES: string[] = [
+  ...lines.greet('Noor'),
+  ...lines.touch('Broccoli'),
+  ...lines.touchSeed(),
+  ...lines.reveal('wortel en prei'),
+  ...lines.discovery('Pompoen'),
+  ...lines.discoveryMany(),
+  ...lines.drop(),
+  ...lines.growth('Wortel', 'een konijn'),
+  ...PHASES.map((p) => lines.power('Wortel', p.power)[0]!),
+  ...lines.fountain(),
+  ...lines.mentor('Broccoli', 'broccoli'),
+  ...lines.mentorPractice('Broccoli', 'broccoli'),
+  ...lines.beforeDinner('Pompoen'),
+  ...lines.beforeDinnerSeed('pompoen'),
+];
+const SOUNDS: SoundName[] = [
+  'plop',
+  'pling',
+  'groei',
+  'kwaak',
+  'giechel',
+  'druppel',
+  'fontein',
+  'woesj',
+  'tik',
+];
 
 export function DevTools() {
   const children = useAppStore((s) => s.children);
@@ -20,6 +51,7 @@ export function DevTools() {
     }
   });
   const kid = childId || selected || '';
+  const [line, setLine] = useState(0);
 
   return (
     <section className="mb-4 space-y-2">
@@ -83,6 +115,27 @@ export function DevTools() {
         </button>
         <button type="button" className={btn} onClick={() => kid && devGardenShowcase(kid)}>
           Tuin vullen
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => {
+            unlockAudio();
+            void speak(SAMPLE_LINES[line % SAMPLE_LINES.length]!, { force: true });
+            setLine((l) => l + 1);
+          }}
+        >
+          Volgende zin
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => {
+            unlockAudio();
+            SOUNDS.forEach((name, i) => setTimeout(() => playSound(name), 100 + i * 700));
+          }}
+        >
+          Alle geluidjes
         </button>
         <button
           type="button"

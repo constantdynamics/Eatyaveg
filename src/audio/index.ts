@@ -4,5 +4,13 @@
  */
 export { unlockAudio } from './unlock';
 export { playSound, type SoundName } from './sounds';
-export { speak, cancelSpeech, estimateSpeechMs } from './voice';
+export {
+  speak,
+  cancelSpeech,
+  estimateSpeechMs,
+  listDutchVoices,
+  voicesReady,
+  pickVoice,
+  type VoiceOption,
+} from './voice';
 export { setAudioPrefs, getAudioPrefs } from './prefs';
