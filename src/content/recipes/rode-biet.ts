@@ -1,0 +1,112 @@
+import {
+  aardappelen,
+  appel,
+  bieten,
+  boter,
+  citroen,
+  defineRecipe,
+  kikkererwten,
+  knoflook,
+  melk,
+  olie,
+  parmezaan,
+  pasta,
+  peper,
+  roomkaas,
+  tahin,
+  zout,
+} from './_helpers';
+
+const NITRAAT_TIP =
+  'Rode biet mag gewoon vaker per week. Koel restjes snel af en bewaar ze in de koelkast.';
+
+export const rodeBietRecipes = [
+  defineRecipe({
+    id: 'roze-bietenhummus',
+    name: 'Roze bietenhummus',
+    description: 'Zachtroze hummus met voorgekookte biet, mild en een beetje zoet.',
+    category: 'saus-dip',
+    mainVeggie: 'rode-biet',
+    visibility: 1,
+    timeMinutes: 10,
+    ingredients: [
+      kikkererwten(1),
+      bieten(150),
+      tahin(1),
+      citroen(0.5),
+      knoflook(0.5),
+      olie(2),
+      zout(),
+    ],
+    steps: [
+      'Laat de kikkererwten uitlekken en spoel ze af. Snijd de bieten in stukjes.',
+      'Pureer alles met de tahin, het citroensap, de knoflook en de olijfolie tot een gladde, roze hummus.',
+      'Voeg zo nodig een scheutje water toe. Doe pas na het opscheppen van de kinderportie een snufje zout bij de rest.',
+    ],
+    tips: {
+      verstoppen: 'De kleur verraadt de biet, maar de smaak is mild en zoet.',
+      weerstand: 'Roze eten is vaak een feestje: noem het flamingohummus als dat werkt.',
+      bewaren: '3 dagen in de koelkast.',
+      veiligheid: NITRAAT_TIP,
+    },
+    allergens: ['sesam'],
+  }),
+  defineRecipe({
+    id: 'roze-pasta',
+    name: 'Roze pasta',
+    description: 'Vrolijk roze pastasaus van biet en roomkaas.',
+    category: 'hoofdgerecht',
+    mainVeggie: 'rode-biet',
+    visibility: 1,
+    timeMinutes: 20,
+    ingredients: [
+      pasta(350, 'pasta', 'bijvoorbeeld vlinderpasta'),
+      bieten(250),
+      roomkaas(150),
+      melk(100),
+      knoflook(1),
+      parmezaan(30),
+      peper(),
+    ],
+    steps: [
+      'Kook de pasta volgens de verpakking.',
+      {
+        verstopt: 'Pureer de bieten glad met de roomkaas, de melk en de knoflook.',
+        zichtbaar:
+          'Rasp de helft van de bieten fijn en pureer de rest met de roomkaas, de melk en de knoflook.',
+      },
+      'Verwarm de saus zachtjes en meng hem met de pasta.',
+      'Strooi er wat Parmezaanse kaas over en breng op smaak met peper.',
+    ],
+    tips: {
+      verstoppen: 'Roomkaas maakt de bietensmaak zacht en romig.',
+      weerstand: 'Laat je kind raden waar de roze kleur vandaan komt.',
+      bewaren: '2 dagen in de koelkast.',
+      veiligheid: NITRAAT_TIP,
+    },
+    allergens: ['gluten', 'melk'],
+  }),
+  defineRecipe({
+    id: 'stamppot-rode-biet',
+    name: 'Stamppot rode biet met appel',
+    description: 'Zoete, roze stamppot met blokjes biet en appel.',
+    category: 'hoofdgerecht',
+    mainVeggie: 'rode-biet',
+    visibility: 3,
+    nextStep: true,
+    timeMinutes: 30,
+    ingredients: [aardappelen(1000), bieten(300), appel(1), melk(100), boter(20), peper()],
+    steps: [
+      'Schil de aardappelen, snijd ze in stukken en kook ze in 15 minuten gaar.',
+      'Snijd de bieten in kleine blokjes. Schil de appel en snijd hem ook in kleine blokjes.',
+      'Stamp de aardappelen met de warme melk en de boter. Roer de bieten en de appel erdoor en warm alles nog even door.',
+      'Breng op smaak met peper. Lekker met een gehaktbal ernaast.',
+    ],
+    tips: {
+      weerstand: 'Vertel dat er appel in zit: dat maakt het vertrouwder.',
+      bewaren: 'Koel restjes snel af en eet ze binnen een dag op.',
+      veiligheid: `Snijd de blokjes klein voor jonge kinderen. ${NITRAAT_TIP}`,
+    },
+    allergens: ['melk'],
+  }),
+];
