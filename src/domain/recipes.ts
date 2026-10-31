@@ -109,3 +109,13 @@ export function matchesFilters(
   }
   return true;
 }
+
+/** Korte regel onder een recept in een lijst. */
+export function recipeMeta(recipe: Recipe): string {
+  const parts = [`${recipe.timeMinutes} min`, CATEGORY_LABEL[recipe.category]];
+  if (recipe.nextStep) parts.push('Volgende stap');
+  else if (recipe.hasVariants) parts.push('Onzichtbaar of licht zichtbaar');
+  else parts.push(VISIBILITY_LABEL[recipe.visibility]);
+  if (recipe.weekend) parts.push('Weekend');
+  return parts.join(' · ');
+}

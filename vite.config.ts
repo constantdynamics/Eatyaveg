@@ -40,6 +40,9 @@ const isTest = process.env.VITEST === 'true';
 
 export default defineConfig({
   base: './',
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? '1.0.0'),
+  },
   build: {
     target: 'es2022',
     // Geen data:-URI's voor fonts en assets: houdt de CSP strikt en de precache voorspelbaar.

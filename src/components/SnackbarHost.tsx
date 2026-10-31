@@ -1,10 +1,18 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import { useUiStore } from '../store/ui-store';
 
 /** Rustige melding onderin met maximaal twee acties (ongedaan maken, toon aan). */
 export function SnackbarHost() {
   const snackbar = useUiStore((s) => s.snackbar);
   const hide = useUiStore((s) => s.hideSnackbar);
+
+  const { pathname } = useLocation();
+
+  // Een melding hoort bij het scherm waar hij ontstond.
+  useEffect(() => {
+    hide();
+  }, [pathname, hide]);
 
   useEffect(() => {
     if (!snackbar) return;
@@ -19,9 +27,9 @@ export function SnackbarHost() {
     >
       <div role="status" aria-live="polite" className="w-full max-w-xl">
         {snackbar && (
-          <div className="pointer-events-auto flex flex-wrap items-center gap-x-3 gap-y-1 rounded-card bg-ink px-4 py-3 text-white shadow-card">
-            <p className="min-w-0 flex-1 py-1">{snackbar.text}</p>
-            <div className="flex flex-wrap gap-1">
+          <div className="pointer-events-auto rounded-card bg-ink px-4 pb-2 pt-3 text-white shadow-card sm:flex sm:items-center sm:gap-3 sm:py-2">
+            <p className="min-w-0 py-1 sm:flex-1">{snackbar.text}</p>
+            <div className="-mx-2 flex flex-wrap justify-end gap-1">
               {snackbar.actions?.map((a) => (
                 <button
                   key={a.label}
