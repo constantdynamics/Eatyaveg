@@ -21,6 +21,7 @@ import { OnboardingPage } from '../features/onboarding/OnboardingPage';
 const GardenPage = lazy(() => import('../features/garden/GardenPage'));
 const CookPage = lazy(() => import('../features/cook/CookPage'));
 const DevPanel = lazy(() => import('../features/dev/DevPanel'));
+const CharacterGallery = lazy(() => import('../features/dev/CharacterGallery'));
 
 function Loading() {
   return (
@@ -36,6 +37,7 @@ function OnboardingGuard({ children }: { children: ReactNode }) {
   const hasChildren = useAppStore((s) => s.children.length > 0);
   const location = useLocation();
   const atWelcome = location.pathname === '/welkom';
+  if (location.pathname.startsWith('/dev/')) return <>{children}</>;
   if ((!onboarded || !hasChildren) && !atWelcome) return <Navigate to="/welkom" replace />;
   if (onboarded && hasChildren && atWelcome) return <Navigate to="/" replace />;
   return <>{children}</>;
@@ -50,6 +52,9 @@ export function App() {
             <Suspense fallback={<Loading />}>
               <Routes>
                 <Route path="/welkom" element={<OnboardingPage />} />
+                {isDevPanelEnabled() && (
+                  <Route path="/dev/vriendjes" element={<CharacterGallery />} />
+                )}
                 <Route path="/tuin/:kindId" element={<GardenPage />} />
                 <Route path="/recepten/:id/koken" element={<CookPage />} />
                 <Route element={<ParentLayout />}>

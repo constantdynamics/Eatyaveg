@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import './tokens.css';
 @import './veggies.css';
+@import '../characters/characters.css';
 @import '@fontsource/nunito/latin-700.css';
 @import '@fontsource/nunito/latin-800.css';
 @import '@fontsource/atkinson-hyperlegible-next/latin-400.css';

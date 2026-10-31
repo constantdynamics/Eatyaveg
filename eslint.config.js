@@ -65,6 +65,11 @@ export default tseslint.config(
     },
   },
   {
+    // Tekendata (lichamen, rekwisieten, dieren) met kleine lokale tekenhulpjes.
+    files: ['src/characters/bodies.tsx', 'src/characters/props.tsx', 'src/characters/animals.tsx'],
+    rules: { 'react-refresh/only-export-components': 'off' },
+  },
+  {
     files: ['src/lib/clock.ts', 'src/lib/id.ts', 'scripts/**', 'tests/**'],
     rules: { 'no-restricted-properties': 'off' },
   },
