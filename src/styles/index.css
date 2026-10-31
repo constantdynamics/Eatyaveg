@@ -55,10 +55,11 @@
     background: rgb(43 39 34 / 0.35);
   }
 
+  /* De tuin regelt zijn eigen, korte overgangen (§8.4). */
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    :not(.fv-garden, .fv-garden *),
+    :not(.fv-garden, .fv-garden *)::before,
+    :not(.fv-garden, .fv-garden *)::after {
       animation-duration: 1ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 1ms !important;

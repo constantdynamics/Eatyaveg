@@ -24,6 +24,12 @@ describe('codekwaliteit (§15)', () => {
     expect(offenders).toEqual([]);
   });
 
+  it('store-selectors geven geen nieuwe lijsten of objecten terug (oneindige render-lus)', () => {
+    const pattern = /use(App|Ui)Store\(\(s\) => [^;]*\?\? (\[\]|\{\})\)/;
+    const offenders = sources.filter((s) => pattern.test(s.text)).map((s) => s.path);
+    expect(offenders).toEqual([]);
+  });
+
   it('geen Date.now() of Math.random() in domeinlogica', () => {
     const offenders = sources
       .filter((s) => s.path.includes(`${join('src', 'domain')}`))

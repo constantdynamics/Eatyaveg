@@ -89,6 +89,7 @@ export function VeggieCharacter({
   phase = 1,
   size = 120,
   animated = true,
+  breathe = true,
   delay = 0,
   title,
   className = '',
@@ -118,7 +119,7 @@ export function VeggieCharacter({
       aria-hidden={title ? undefined : true}
       focusable="false"
     >
-      <g className={dancing ? 'fv-dance-body' : animated ? 'fv-breathe' : undefined}>
+      <g className={dancing ? 'fv-dance-body' : animated && breathe ? 'fv-breathe' : undefined}>
         <Leg
           hip={hl}
           ground={GROUND}

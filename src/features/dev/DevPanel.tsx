@@ -2,18 +2,26 @@
  * Dev-paneel (§11.5): alleen in development of met ?dev=1. Tijd verschuiven, registraties
  * toevoegen, fase zetten, momenten opnieuw afspelen, zinnen testen en data resetten.
  */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import { Wrench } from 'lucide-react';
 import { clock, useClockOffset } from '../../lib/clock';
 import { DAY_MS } from '../../lib/dates';
 import { useAppStore } from '../../store/app-store';
 import { DevTools } from './DevTools';
+import { exposeDevActions } from './dev-actions';
 
 export default function DevPanel() {
   const [open, setOpen] = useState(false);
   const offset = useClockOffset();
+  const location = useLocation();
   const days = Math.round(offset / DAY_MS);
 
+  useEffect(() => {
+    exposeDevActions();
+  }, []);
+
+  if (location.pathname.startsWith('/tuin/')) return null;
   return (
     <div className="fixed left-2 top-2 z-[60] print:hidden">
       <button

@@ -41,6 +41,8 @@ export interface CharacterProps {
   /** Hoogte in pixels; de breedte volgt (200 : 240). */
   size?: number;
   animated?: boolean;
+  /** Ademen binnen de SVG; de tuin laat de HTML-laag ademen (goedkoper). */
+  breathe?: boolean;
   /** Persoonlijke vertraging voor knipperen en ademen, zodat niet alles tegelijk beweegt. */
   delay?: number;
   title?: string;

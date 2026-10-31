@@ -1,0 +1,569 @@
+/* De tuin: levendig maar rustig (§14.2). Alleen transform en opacity animeren. */
+.fv-garden {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #e3eff3;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  cursor: default;
+}
+
+.fv-world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4200px;
+  height: 1000px;
+  transform-origin: 0 0;
+}
+
+.fv-world--animate {
+  transition: transform 1100ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.fv-parallax {
+  transition: transform 1100ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.fv-garden--drag .fv-world,
+.fv-garden--drag .fv-parallax {
+  transition: none;
+}
+
+.fv-garden--overview .fv-detail {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fv-detail {
+  transition: opacity 400ms ease-out;
+}
+
+/* Dimmen tijdens een moment: de rest van de tuin iets zachter. */
+.fv-dim {
+  position: absolute;
+  left: -2000px;
+  top: -2000px;
+  width: 8200px;
+  height: 5000px;
+  background: #fffaf0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms ease-out;
+  z-index: 5000;
+}
+
+.fv-dim--on {
+  opacity: 0.45;
+}
+
+.fv-buddy {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.fv-buddy--focus {
+  z-index: 6000 !important;
+}
+
+.fv-buddy-move {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: transform 2200ms ease-in-out;
+}
+
+.fv-buddy-scale {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform-origin: 0 100%;
+  transition: transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fv-buddy-inner {
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+  line-height: 0;
+}
+
+.fv-breathe-html {
+  transform-origin: 50% 100%;
+  animation: fv-breathe-html 3.6s ease-in-out infinite;
+  animation-delay: var(--fv-delay, 0s);
+}
+
+@keyframes fv-breathe-html {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.015, 0.985);
+  }
+}
+
+.fv-hit {
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  border-radius: 40%;
+}
+
+.fv-fx-jump {
+  animation: fv-jump 650ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fv-fx-giggle {
+  animation: fv-giggle 600ms ease-in-out;
+}
+
+.fv-fx-pop {
+  animation: fv-pop 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fv-fx-wiggle {
+  animation: fv-wiggle-x 700ms ease-in-out;
+}
+
+@keyframes fv-jump {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  25% {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+  55% {
+    transform: translateY(-22%) scale(0.96, 1.05);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+@keyframes fv-giggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-6deg);
+  }
+  40% {
+    transform: rotate(6deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+  80% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes fv-pop {
+  0% {
+    transform: translateY(30%) scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-12%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fv-wiggle-x {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-8deg);
+  }
+  80% {
+    transform: rotate(6deg);
+  }
+}
+
+.fv-fade-in {
+  animation: fv-fade-in 500ms ease-out both;
+}
+
+@keyframes fv-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6%) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fv-drop-new {
+  animation: fv-drop-fill 700ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+@keyframes fv-drop-fill {
+  from {
+    transform: scale(0.2);
+    opacity: 0.2;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Objecten in de zones */
+.fv-obj {
+  transform-box: fill-box;
+}
+
+.fv-swing-seat {
+  transform-origin: 50% 0;
+  transform-box: view-box;
+}
+
+.fv-swing--go {
+  animation: fv-swing-go 2.4s ease-in-out;
+}
+
+@keyframes fv-swing-go {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  15% {
+    transform: rotate(18deg);
+  }
+  40% {
+    transform: rotate(-16deg);
+  }
+  62% {
+    transform: rotate(11deg);
+  }
+  82% {
+    transform: rotate(-6deg);
+  }
+}
+
+.fv-duck {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: fv-bob 3.2s ease-in-out infinite;
+}
+
+.fv-duck--quack {
+  animation: fv-paddle 1.4s ease-in-out;
+}
+
+@keyframes fv-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes fv-paddle {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-26px) rotate(-6deg);
+  }
+  60% {
+    transform: translateX(10px) rotate(4deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.fv-bloom {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.fv-bloom--open {
+  animation: fv-bloom 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fv-bloom {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25, 1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fv-butterfly {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fv-flutter-path 9s ease-in-out infinite;
+}
+
+.fv-butterfly-wing {
+  transform-box: fill-box;
+  transform-origin: 100% 50%;
+  animation: fv-flap 0.35s ease-in-out infinite alternate;
+}
+
+.fv-butterfly-wing--r {
+  transform-origin: 0 50%;
+}
+
+.fv-butterfly--away {
+  animation: fv-fly-away 6s ease-in-out;
+}
+
+@keyframes fv-flutter-path {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(40px, -24px);
+  }
+  50% {
+    transform: translate(80px, 6px);
+  }
+  75% {
+    transform: translate(30px, 20px);
+  }
+}
+
+@keyframes fv-flap {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0.35);
+  }
+}
+
+@keyframes fv-fly-away {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(260px, -240px);
+    opacity: 0;
+  }
+  70% {
+    transform: translate(-200px, -200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.fv-water-drop {
+  animation: fv-water 1.4s ease-in both;
+}
+
+@keyframes fv-water {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-30px, 60px);
+    opacity: 0;
+  }
+}
+
+.fv-tree--rustle {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: fv-wiggle-x 900ms ease-in-out;
+}
+
+.fv-ball--bounce {
+  animation: fv-ball 1.2s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+@keyframes fv-ball {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-70px);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  72% {
+    transform: translateY(-26px);
+  }
+  86% {
+    transform: translateY(0);
+  }
+}
+
+/* Fontein van de walvis */
+.fv-fountain path {
+  animation: fv-fountain 1.6s ease-out both;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+@keyframes fv-fountain {
+  0% {
+    transform: scaleY(0.1);
+    opacity: 0;
+  }
+  30% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1.1) translateY(-6px);
+    opacity: 0;
+  }
+}
+
+/* Confetti: kort (±1,5 s) en zuinig */
+.fv-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.fv-confetti i {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  animation: fv-confetti 1.5s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+@keyframes fv-confetti {
+  0% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+/* Ouder-knop */
+.fv-parent {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  left: calc(env(safe-area-inset-left, 0px) + 12px);
+  z-index: 30;
+  width: 52px;
+  height: 52px;
+  border-radius: 9999px;
+  background: rgb(255 253 248 / 0.7);
+  color: #5f574c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  touch-action: none;
+}
+
+.fv-parent--hint {
+  animation: fv-wiggle-x 600ms ease-in-out;
+}
+
+.fv-parent-ring {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.fv-zoomout {
+  position: absolute;
+  right: calc(env(safe-area-inset-right, 0px) + 16px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  z-index: 30;
+  width: 72px;
+  height: 72px;
+  border-radius: 9999px;
+  background: rgb(255 253 248 / 0.75);
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 300ms ease-out;
+}
+
+.fv-fps {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 40;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgb(43 39 34 / 0.75);
+  color: #fff;
+  font:
+    600 12px/1.4 ui-monospace,
+    monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fv-world--animate,
+  .fv-parallax {
+    transition-duration: 250ms;
+  }
+
+  .fv-duck,
+  .fv-butterfly,
+  .fv-butterfly-wing,
+  .fv-breathe-html {
+    animation: none;
+  }
+
+  .fv-confetti {
+    display: none;
+  }
+
+  .fv-garden * {
+    animation-iteration-count: 1 !important;
+  }
+
+  .fv-buddy-move {
+    transition-duration: 400ms;
+  }
+}
