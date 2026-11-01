@@ -12,9 +12,8 @@ Vandaag, aantikken (plusknop, raster en vanuit een recept), groente-detail met W
 Mijn data, en de groentetuin met 14 eigen SVG-vriendjes, 9 krachten, 9 dieren, momenten, geluid
 en een Nederlandse stem. Alles blijft op het apparaat.
 
-**URL:** nog niet live. De repo was leeg, dus er is nog geen `main`. Zodra `main` bestaat en
-GitHub Pages op *GitHub Actions* staat (zie README), publiceert de workflow de app op
-`https://constantdynamics.github.io/Eatyaveg/`. Tot die tijd: `npm ci && npm run dev`.
+**URL:** https://constantdynamics.github.io/Eatyaveg/ (live sinds 1 november 2026, gepubliceerd
+vanaf `main` via GitHub Actions; zie README).
 
 ## Wat werkt (getoetst)
 
@@ -34,8 +33,6 @@ GitHub Pages op *GitHub Actions* staat (zie README), publiceert de workflow de a
 
 ## Wat (nog) niet, en bekende beperkingen
 
-- **Publiceren**: vraagt een `main`-branch en één handmatige instelling (Settings → Pages →
-  Source: GitHub Actions). Een pull request kon ik niet openen: er is geen basisbranch.
 - **Echte apparaten** konden hier niet getest worden: installeren op iPad/Android, de echte stemmen
   (kwaliteit verschilt per apparaat; headless Chromium heeft geen Nederlandse stem), 60 fps op een
   gemiddelde tablet. De app valt stil terug: zonder Nederlandse stem alleen geluid en beweging.

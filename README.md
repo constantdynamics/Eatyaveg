@@ -38,15 +38,20 @@ fps-meter en data wissen. In `npm run dev` staat het paneel altijd aan.
 
 ## Publiceren op GitHub Pages
 
+De app staat op **https://constantdynamics.github.io/Eatyaveg/**.
+
 De workflow `.github/workflows/deploy.yml` bouwt en test bij elke pull request en publiceert bij
-een push naar `main`.
+een push naar `main` (of handmatig: Actions → Build en deploy → Run workflow).
 
-Eenmalig handmatig:
+Eenmalig handmatig, in deze volgorde (voor deze repo al gedaan):
 
-1. Zorg dat er een branch `main` is (en maak die de standaardbranch).
-2. Ga in GitHub naar **Settings → Pages → Build and deployment → Source** en kies
-   **GitHub Actions**.
-3. Push naar `main`. De app staat daarna op `https://<eigenaar>.github.io/<repo>/`.
+1. Zorg dat er een branch `main` is en maak die de standaardbranch
+   (**Settings → General → Default branch**).
+2. Ga naar **Settings → Pages → Build and deployment → Source** en kies **GitHub Actions**.
+3. Controleer **Settings → Environments → github-pages → Deployment branches and tags**: daar
+   moet `main` toegestaan zijn. GitHub zet er de standaardbranch van dat moment in; stond Pages
+   eerder aan dan stap 1, dan weigert de publicatiestap `main` zonder log.
+4. Push naar `main`. De app staat daarna op `https://<eigenaar>.github.io/<repo>/`.
 
 Omdat de app relatieve paden en een `HashRouter` gebruikt, werkt hij onder elke reponaam en ook op
 Netlify of Vercel zonder aanpassingen (publiceer de map `dist/`).
